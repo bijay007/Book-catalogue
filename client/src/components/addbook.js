@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import { css } from "emotion";
 
 const visible= css({
@@ -41,7 +41,7 @@ const close_btn = css({
   padding: '5px'
 })
 
-export default class AddBook extends Component {
+export default class AddBook extends PureComponent {
 
   constructor(props) {
     super(props)
@@ -51,28 +51,33 @@ export default class AddBook extends Component {
       genre: '',
       valid: false
     }
+    this.validateForm = this.validateForm.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.closeModalAndSaveBook = this.closeModalAndSaveBook.bind(this);
   }
 
   validateForm() {
-    if(this.state.name) {
-      this.setState({valid: true})
-    }
+    this.state.name !== ''
+      ? this.setState({valid: true})
+      : this.setState({valid: false})
   }
 
   handleChange(event) {
-    this.setState({[event.target.name]: event.target.value})
-    this.validateForm();
+    this.setState({[event.target.name]: event.target.value}, () => {
+      this.validateForm()
+    })
   }
 
   closeModalAndSaveBook(event) {
+    const {name, genre, price, valid} = this.state;
     event.preventDefault();
     this.validateForm();
-    if (this.state.valid) {
+    if (valid) {
       this.props.closeModal();
       this.props.addBook({
-        name: this.state.name,
-        genre: this.state.genre,
-        price: this.state.price
+        name: name,
+        genre: genre,
+        price: price
       });
       this.setState({name: '', genre: '', price: '', valid: false})
     }
@@ -82,13 +87,13 @@ export default class AddBook extends Component {
     return (
       <div className={this.props.showModal ? visible : hidden}>
         <div className={modal_body}>
-          <form className={book_info} onSubmit={this.closeModalAndSaveBook.bind(this)}>
+          <form className={book_info} onSubmit={this.closeModalAndSaveBook}>
             <label for="name">Name</label>
-            <input type="text" value={this.state.name} name="name" placeholder="Name of the book" onChange={this.handleChange.bind(this)} />
+            <input type="text" value={this.state.name} name="name" placeholder="Name of the book" onChange={this.handleChange} />
             <label for="genre">Genre</label>
-            <input type="genre" value={this.state.genre} name="genre" placeholder="Genre of the book" onChange={this.handleChange.bind(this)} />
+            <input type="genre" value={this.state.genre} name="genre" placeholder="Genre of the book" onChange={this.handleChange} />
             <label for="price">Price</label>
-            <input type="number" value={this.state.price} name="price" placeholder="Price in euros" onChange={this.handleChange.bind(this)} />
+            <input type="number" value={this.state.price} name="price" placeholder="Price in euros" onChange={this.handleChange} />
             <button type="submit" disabled={!this.state.valid} className={close_btn}>Save</button>
           </form>
         </div>

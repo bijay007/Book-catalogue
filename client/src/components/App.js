@@ -34,6 +34,9 @@ export default class AppComponent extends Component {
             listOfBooks: [],
             showModal: false
         }
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.addBook = this.addBook.bind(this);
     }
 
     openModal() {
@@ -45,7 +48,7 @@ export default class AppComponent extends Component {
     };
 
     addBook(book) {
-        this.state.listOfBooks.push(book);
+        this.setState({listOfBooks: [...this.state.listOfBooks, book]})
     }
 
     render() {
@@ -55,13 +58,13 @@ export default class AppComponent extends Component {
                     <div className={image}>
                         <img src="/client/public/assests/icons/main_logo.svg" className={image} />
                     </div>
-                    <button type="button" className={add_btn} onClick={this.openModal.bind(this)}>
+                    <button type="button" className={add_btn} onClick={this.openModal}>
                         <img src="/client/public/assests/icons/add_book.svg" className={image} />
                     </button>
                 </div>
                 <div className="contents">
                 </div>
-                <AddBook showModal={this.state.showModal} closeModal={this.closeModal.bind(this)} addBook={this.addBook.bind(this)}/>
+                <AddBook showModal={this.state.showModal} closeModal={this.closeModal} addBook={this.addBook}/>
             </div>
         );
     }
