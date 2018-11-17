@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
 import AddBook from './addbook';
+import BookTable from './bookTable';
 
 const container = css({
   display: 'flex',
@@ -36,6 +37,7 @@ export default class AppComponent extends Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.addBook = this.addBook.bind(this);
+    this.displayBooks = this.displayBooks.bind(this);
   }
 
   openModal() {
@@ -48,11 +50,19 @@ export default class AppComponent extends Component {
 
   addBook(book) {
     const { listOfBooks } = this.state;
-    this.setState({ listOfBooks: [...listOfBooks, book] });
+    this.setState({ listOfBooks: [...listOfBooks, book] }, () => this.displayBooks());
+  }
+
+  displayBooks() {
+    const { listOfBooks } = this.state;
+    return (
+      <BookTable books={listOfBooks} />
+    );
   }
 
   render() {
     const { showModal } = this.state;
+    const showBooks = this.displayBooks();
     return (
       <div className={container}>
         <div className={menu}>
@@ -64,6 +74,9 @@ export default class AppComponent extends Component {
           </button>
         </div>
         <AddBook showModal={showModal} closeModal={this.closeModal} addBook={this.addBook} />
+        <div className="contents">
+          { showBooks }
+        </div>
       </div>
     );
   }
