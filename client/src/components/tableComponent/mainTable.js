@@ -6,14 +6,19 @@ const mainTable = css({
   width: '100%',
   borderTop: '3px solid #000',
   marginTop: '20px',
-});
-const head = css({
-  border: '2px solid #0f0',
+  borderCollapse: 'collapse',
+  textAlign: 'center',
+  '& .head': {
+    borderBottom: '2px solid #000',
+  },
+  '& th': {
+    padding: '3px',
+  },
 });
 
 const BookTable = props => (
   <table className={mainTable}>
-    <tr className={head}>
+    <tr className="head">
       <th>Name</th>
       <th>Genre</th>
       <th>Price</th>
