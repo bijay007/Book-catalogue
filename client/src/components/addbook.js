@@ -96,11 +96,11 @@ export default class AddBook extends PureComponent {
         <div className={modalBody}>
           <form className={bookInfo} onSubmit={this.closeModalAndSaveBook}>
             <span>Name</span>
-            <input type="text" value={name} id="name" placeholder="Name of the book" onChange={this.handleChange} />
+            <input type="text" value={name} name="name" placeholder="Name of the book" onChange={this.handleChange} />
             <span>Genre</span>
-            <input type="genre" value={genre} id="genre" placeholder="Genre of the book" onChange={this.handleChange} />
+            <input type="genre" value={genre} name="genre" placeholder="Genre of the book" onChange={this.handleChange} />
             <span>Price</span>
-            <input type="number" value={price} id="price" placeholder="Price in euros" onChange={this.handleChange} />
+            <input type="number" value={price} name="price" placeholder="Price in euros" onChange={this.handleChange} />
             <button type="submit" disabled={!valid} className={closeBtn}>Save</button>
           </form>
         </div>

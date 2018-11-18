@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
 import AddBook from './addbook';
-import BookTable from './bookTable';
+import BookTable from './tableComponent/mainTable';
 
 const container = css({
   display: 'flex',
@@ -25,6 +25,9 @@ const menu = css({
 const addBtn = css({
   border: 'none',
   background: 'none',
+});
+const contents = css({
+  display: 'flex',
 });
 
 export default class AppComponent extends Component {
@@ -74,7 +77,7 @@ export default class AppComponent extends Component {
           </button>
         </div>
         <AddBook showModal={showModal} closeModal={this.closeModal} addBook={this.addBook} />
-        <div className="contents">
+        <div className={contents}>
           { showBooks }
         </div>
       </div>
