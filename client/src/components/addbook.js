@@ -72,13 +72,14 @@ export default class AddBook extends PureComponent {
     const {
       name, genre, price, valid,
     } = this.state;
+    const uniqueId = (name + genre + price).toString();
     const { closeModal, addBook } = this.props;
     event.preventDefault();
     this.validateForm();
     if (valid) {
       closeModal();
       addBook({
-        name, genre, price,
+        name, genre, price, uniqueId,
       });
       this.setState({
         name: '', genre: '', price: '', valid: false,

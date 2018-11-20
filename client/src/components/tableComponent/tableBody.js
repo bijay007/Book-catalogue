@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
 
-const pencil = css({
-  width: '15px',
+const delBook = css({
+  width: '20px',
   height: 'auto',
 });
 const cellPadding = css({
@@ -13,12 +13,12 @@ const cellPadding = css({
 export default class DynamicTBody extends Component {
   constructor(props) {
     super(props);
-    this.editDelete = this.editDelete.bind(this);
+    this.deleteBook = this.deleteBook.bind(this);
   }
 
-  editDelete(book, index) {
+  deleteBook(index) {
     const { books } = this.props;
-    books.editBook(book, index);
+    books.deleteBook(index);
   }
 
   render() {
@@ -26,11 +26,11 @@ export default class DynamicTBody extends Component {
     return (
       books.books.length
         ? books.books.map((book, index) => (
-          <tr id={index}>
+          <tr>
             <td className={cellPadding}>{book.name}</td>
             <td className={cellPadding}>{book.genre}</td>
             <td className={cellPadding}>{book.price}</td>
-            <td className={cellPadding} onClick={() => this.editDelete(book, index)} role="presentation"><img className={pencil} src="/client/public/assests/icons/edit_book.svg" alt="edit and/or delete" /></td>
+            <td className={cellPadding} onClick={() => this.deleteBook(index)} role="presentation"><img className={delBook} src="/client/public/assests/icons/delete_book.svg" alt="delete book" /></td>
           </tr>
         ))
         : (

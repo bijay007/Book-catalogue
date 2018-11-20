@@ -41,7 +41,7 @@ export default class AppComponent extends Component {
     this.closeModal = this.closeModal.bind(this);
     this.addBook = this.addBook.bind(this);
     this.displayBooks = this.displayBooks.bind(this);
-    this.editBook = this.editBook.bind(this);
+    this.deleteBook = this.deleteBook.bind(this);
   }
 
   openModal() {
@@ -57,16 +57,16 @@ export default class AppComponent extends Component {
     this.setState({ listOfBooks: [...listOfBooks, book] }, () => this.displayBooks());
   }
 
-  editBook(book, index) {
-    console.log(this.state);
-    console.log(book, index);
-    return null;
+  deleteBook(index) {
+    const { listOfBooks } = this.state;
+    listOfBooks.splice(index, 1);
+    this.setState({ listOfBooks: [...listOfBooks] });
   }
 
   displayBooks() {
     const { listOfBooks } = this.state;
     return (
-      <BookTable books={listOfBooks} editBook={this.editBook} />
+      <BookTable books={listOfBooks} deleteBook={this.deleteBook} />
     );
   }
 
