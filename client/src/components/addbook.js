@@ -71,7 +71,7 @@ export default class AddBook extends PureComponent {
     const {
       name, genre, price, valid,
     } = this.state;
-    const uniqueId = (name + genre + price).toString();
+    const uniqueId = (name + price + genre + new Date()).toString();
     const { closeModal, addBook } = this.props;
     event.preventDefault();
     this.validateForm();
@@ -100,7 +100,7 @@ export default class AddBook extends PureComponent {
             <span>Genre</span>
             <input type="genre" value={genre} name="genre" placeholder="Genre of the book" onChange={this.handleChange} />
             <span>Price</span>
-            <input type="number" value={price} name="price" placeholder="Price in euros" onChange={this.handleChange} />
+            <input type="number" value={price} name="price" min="0" placeholder="Price in euros" onChange={this.handleChange} />
             <button type="submit" disabled={!valid} className={closeBtn}>Save</button>
           </form>
         </div>

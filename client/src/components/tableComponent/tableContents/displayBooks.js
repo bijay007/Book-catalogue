@@ -21,17 +21,19 @@ const actions = css({
 });
 
 const DisplayBooks = (props) => {
-  const { books, deleteBook } = props;
+  const {
+    books, deleteBook, removeGenre, editBook,
+  } = props;
   return books.map((book, index) => (
     <tr>
       <td className={cellPadding}>{book.name}</td>
       <td className={cellPadding}>{book.genre}</td>
       <td className={cellPadding}>{book.price}</td>
-      <td className={cellPadding} onClick={() => deleteBook(index)} role="presentation">
+      <td className={cellPadding}>
         <div className={actions}>
-          <img className={edition} src="/client/public/assests/icons/edit_book.svg" alt="edit book" />
-          <img className={edition} src="/client/public/assests/icons/delete_book.svg" alt="delete book" />
-          <img className={delGenre} src="/client/public/assests/icons/delete_genre.png" alt="delete book" />
+          <img className={edition} onClick={() => editBook(book.uniqueId)} role="presentation" src="/client/public/assests/icons/edit_book.svg" alt="edit book" />
+          <img className={edition} onClick={() => deleteBook(index)} role="presentation" src="/client/public/assests/icons/delete_book.svg" alt="delete book" />
+          <img className={delGenre} onClick={() => removeGenre(book.uniqueId)} role="presentation" src="/client/public/assests/icons/delete_genre.png" alt="delete book" />
         </div>
       </td>
     </tr>

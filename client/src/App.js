@@ -39,9 +39,11 @@ export default class AppComponent extends Component {
     };
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.addBook = this.addBook.bind(this);
     this.displayBooks = this.displayBooks.bind(this);
+    this.addBook = this.addBook.bind(this);
     this.deleteBook = this.deleteBook.bind(this);
+    this.removeGenre = this.removeGenre.bind(this);
+    this.editBook = this.editBook.bind(this);
   }
 
   openModal() {
@@ -63,10 +65,26 @@ export default class AppComponent extends Component {
     this.setState({ listOfBooks: [...listOfBooks] });
   }
 
+  removeGenre(id) {
+    const { listOfBooks } = this.state;
+    const bookIndex = listOfBooks.findIndex(book => book.uniqueId === id);
+    listOfBooks[bookIndex].genre = '';
+    this.setState({ listOfBooks: [...listOfBooks] });
+  }
+
+  editBook(id) {
+    console.log(this.state, id);
+  }
+
   displayBooks() {
     const { listOfBooks } = this.state;
     return (
-      <BookTable books={listOfBooks} deleteBook={this.deleteBook} />
+      <BookTable
+        books={listOfBooks}
+        deleteBook={this.deleteBook}
+        removeGenre={this.removeGenre}
+        editBook={this.editBook}
+      />
     );
   }
 
