@@ -35,7 +35,6 @@ const bookInfo = css({
   padding: '5px',
 });
 
-
 const closeBtn = css({
   border: '1px solid green',
   fontSize: '18px bold',

@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'emotion';
-
-const delBook = css({
-  width: '20px',
-  height: 'auto',
-});
-const cellPadding = css({
-  padding: '5px',
-});
+import DisplayBooks from './tableContents/displayBooks';
+import DisplayNoBookEmoji from './tableContents/displayNoBookEmoji';
 
 export default class DynamicTBody extends Component {
   constructor(props) {
@@ -25,19 +18,8 @@ export default class DynamicTBody extends Component {
     const { books } = this.props;
     return (
       books.books.length
-        ? books.books.map((book, index) => (
-          <tr>
-            <td className={cellPadding}>{book.name}</td>
-            <td className={cellPadding}>{book.genre}</td>
-            <td className={cellPadding}>{book.price}</td>
-            <td className={cellPadding} onClick={() => this.deleteBook(index)} role="presentation"><img className={delBook} src="/client/public/assests/icons/delete_book.svg" alt="delete book" /></td>
-          </tr>
-        ))
-        : (
-          <tr>
-            <td className={cellPadding}><span role="img" aria-label="sad-face">😔</span></td>
-          </tr>
-        )
+        ? <DisplayBooks books={books.books} deleteBook={this.deleteBook} />
+        : <DisplayNoBookEmoji />
     );
   }
 }

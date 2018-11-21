@@ -13,6 +13,7 @@ const mainTable = css({
   },
   '& th': {
     padding: '3px',
+    border: '1px solid #000',
   },
 });
 
