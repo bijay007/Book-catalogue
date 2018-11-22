@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
-import AddBook from './components/addBook';
 import BookTable from './components/table/mainTable';
+import MainModal from './components/modal/mainModal';
+import AddUpdateBook from './components/addUpdateBook';
 
 const container = css({
   display: 'flex',
@@ -26,6 +27,17 @@ const addBtn = css({
   border: 'none',
   background: 'none',
 });
+const visible = css({
+  position: 'fixed',
+  top: '0',
+  left: '0',
+  width: '100%',
+  height: '100%',
+  background: 'rgba(0, 0, 0, 0.6)',
+});
+const hidden = css({
+  display: 'none',
+});
 const contents = css({
   display: 'flex',
 });
@@ -36,6 +48,7 @@ export default class AppComponent extends Component {
     this.state = {
       listOfBooks: [],
       showModal: false,
+      bookToEdit: {},
     };
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -73,7 +86,9 @@ export default class AppComponent extends Component {
   }
 
   editBook(id) {
-    console.log(this.state, id);
+    const { listOfBooks } = this.state;
+    const bookIndex = listOfBooks.findIndex(book => book.uniqueId === id);
+    this.setState({ bookToEdit: listOfBooks[bookIndex] }, this.openModal());
   }
 
   displayBooks() {
@@ -89,7 +104,7 @@ export default class AppComponent extends Component {
   }
 
   render() {
-    const { showModal } = this.state;
+    const { showModal, bookToEdit } = this.state;
     const showBooks = this.displayBooks();
     return (
       <div className={container}>
@@ -101,7 +116,16 @@ export default class AppComponent extends Component {
             <img src="/client/public/assests/icons/add_book.svg" alt="addbtn" className={image} />
           </button>
         </div>
-        <AddBook showModal={showModal} closeModal={this.closeModal} addBook={this.addBook} />
+        <div className={showModal ? visible : hidden}>
+          <MainModal>
+            <AddUpdateBook
+              closeModal={this.closeModal}
+              addBook={this.addBook}
+              editBook={this.editBook}
+              bookToEdit={bookToEdit}
+            />
+          </MainModal>
+        </div>
         <div className={contents}>
           { showBooks }
         </div>
