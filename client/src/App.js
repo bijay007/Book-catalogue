@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
-import AddBook from './components/addbook';
-import BookTable from './components/tableComponent/mainTable';
+import AddBook from './components/addBook';
+import BookTable from './components/table/mainTable';
 
 const container = css({
   display: 'flex',

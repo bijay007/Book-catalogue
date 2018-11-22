@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import DisplayBooks from './tableContents/displayBooks';
 import DisplayNoBookEmoji from './tableContents/displayNoBookEmoji';
 
-export default class DynamicTBody extends Component {
+export default class DynamicTBody extends PureComponent {
   constructor(props) {
     super(props);
     this.deleteBook = this.deleteBook.bind(this);
@@ -36,7 +36,8 @@ export default class DynamicTBody extends Component {
             deleteBook={this.deleteBook}
             removeGenre={this.removeGenre}
             editBook={this.editBook}
-          />)
+          />
+        )
         : <DisplayNoBookEmoji />
     );
   }

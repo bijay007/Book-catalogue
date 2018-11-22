@@ -25,7 +25,7 @@ const DisplayBooks = (props) => {
     books, deleteBook, removeGenre, editBook,
   } = props;
   return books.map((book, index) => (
-    <tr>
+    <tr key={(book + index).toString()}>
       <td className={cellPadding}>{book.name}</td>
       <td className={cellPadding}>{book.genre}</td>
       <td className={cellPadding}>{book.price}</td>

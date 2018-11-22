@@ -19,14 +19,18 @@ const mainTable = css({
 
 const BookTable = props => (
   <table className={mainTable}>
-    <tr className="head">
-      <th>Name</th>
-      <th>Genre</th>
-      <th>Price</th>
-      <th>Actions</th>
-    </tr>
+    <thead className="head">
+      <tr>
+        <th>Name</th>
+        <th>Genre</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
     {
-      <DynamicTBody books={props} />
+      <tbody>
+        <DynamicTBody books={props} />
+      </tbody>
     }
   </table>
 );
