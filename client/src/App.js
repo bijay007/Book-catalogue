@@ -48,7 +48,6 @@ export default class AppComponent extends Component {
     this.state = {
       listOfBooks: [],
       showModal: false,
-      bookToEdit: {},
     };
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -57,6 +56,7 @@ export default class AppComponent extends Component {
     this.deleteBook = this.deleteBook.bind(this);
     this.removeGenre = this.removeGenre.bind(this);
     this.editBook = this.editBook.bind(this);
+    this.updateBook = this.updateBook.bind(this);
   }
 
   openModal() {
@@ -78,17 +78,29 @@ export default class AppComponent extends Component {
     this.setState({ listOfBooks: [...listOfBooks] });
   }
 
-  removeGenre(id) {
+  removeGenre(index) {
     const { listOfBooks } = this.state;
-    const bookIndex = listOfBooks.findIndex(book => book.uniqueId === id);
-    listOfBooks[bookIndex].genre = '';
+    listOfBooks[index].genre = '';
     this.setState({ listOfBooks: [...listOfBooks] });
   }
 
-  editBook(id) {
+  editBook(index) {
     const { listOfBooks } = this.state;
-    const bookIndex = listOfBooks.findIndex(book => book.uniqueId === id);
-    this.setState({ bookToEdit: listOfBooks[bookIndex] }, this.openModal());
+    listOfBooks[index].index = index;
+    this.setState({ listOfBooks: [...listOfBooks] }, this.openModal());
+  }
+
+  updateBook(book) {
+    const { listOfBooks } = this.state;
+    const updatedBook = book;
+    const props = Object.keys(updatedBook);
+    for (let i = 0; i < props.length; i++) {
+      if (props[i] === 'index') {
+        delete updatedBook[props[i]];
+      }
+    }
+    listOfBooks.splice(updatedBook.index, 1, updatedBook);
+    this.setState({ listOfBooks: [...listOfBooks] }, () => this.displayBooks());
   }
 
   displayBooks() {
@@ -104,7 +116,7 @@ export default class AppComponent extends Component {
   }
 
   render() {
-    const { showModal, bookToEdit } = this.state;
+    const { showModal, listOfBooks } = this.state;
     const showBooks = this.displayBooks();
     return (
       <div className={container}>
@@ -121,8 +133,8 @@ export default class AppComponent extends Component {
             <AddUpdateBook
               closeModal={this.closeModal}
               addBook={this.addBook}
-              editBook={this.editBook}
-              bookToEdit={bookToEdit}
+              updateBook={this.updateBook}
+              listOfBooks={listOfBooks}
             />
           </MainModal>
         </div>

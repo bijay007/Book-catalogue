@@ -8,7 +8,8 @@
     "extends": "airbnb",
     "rules": {
         "no-console": "off",
-        "react/jsx-filename-extension": [0]
+        "react/jsx-filename-extension": [0],
+        "no-plusplus": [2, { "allowForLoopAfterthoughts": true }]
     },
     "env": {
         "browser": true,

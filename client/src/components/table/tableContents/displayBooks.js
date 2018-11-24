@@ -31,9 +31,9 @@ const DisplayBooks = (props) => {
       <td className={cellPadding}>{book.price}</td>
       <td className={cellPadding}>
         <div className={actions}>
-          <img className={edition} onClick={() => editBook(book.uniqueId)} role="presentation" src="/client/public/assests/icons/edit_book.svg" alt="edit book" />
+          <img className={edition} onClick={() => editBook(index)} role="presentation" src="/client/public/assests/icons/edit_book.svg" alt="edit book" />
           <img className={edition} onClick={() => deleteBook(index)} role="presentation" src="/client/public/assests/icons/delete_book.svg" alt="delete book" />
-          <img className={delGenre} onClick={() => removeGenre(book.uniqueId)} role="presentation" src="/client/public/assests/icons/delete_genre.png" alt="delete book" />
+          <img className={delGenre} onClick={() => removeGenre(index)} role="presentation" src="/client/public/assests/icons/delete_genre.png" alt="delete book" />
         </div>
       </td>
     </tr>

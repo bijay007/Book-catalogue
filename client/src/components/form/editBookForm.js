@@ -2,6 +2,7 @@ import React from 'react';
 
 export default function EditBookForm(props) {
   const data = props;
+  data.parentState.edition = true;
   return (
     <form className={data.bookInfo} onSubmit={data.closeModalAndSaveBook}>
       <span>New Name</span>

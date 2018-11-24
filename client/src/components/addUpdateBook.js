@@ -25,6 +25,7 @@ export default class AddUpdateBook extends PureComponent {
       price: '',
       genre: '',
       valid: false,
+      edition: false,
     };
     this.validateForm = this.validateForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -44,50 +45,69 @@ export default class AddUpdateBook extends PureComponent {
 
   closeModalAndSaveBook(event) {
     const {
-      name, genre, price, valid,
+      name, genre, price, valid, edition,
     } = this.state;
-    const uniqueId = (name + price + genre + new Date()).toString();
-    const { closeModal, addBook } = this.props;
+    const { closeModal, addBook, updateBook } = this.props;
     event.preventDefault();
     this.validateForm();
     if (valid) {
       closeModal();
-      addBook({
-        name, genre, price, uniqueId,
-      });
+      if (edition) {
+        updateBook({
+          name, genre, price,
+        });
+      } else {
+        addBook({
+          name, genre, price,
+        });
+      }
       this.setState({
-        name: '', genre: '', price: '', valid: false,
+        name: '', genre: '', price: '', valid: false, edition: false,
       });
     }
   }
 
   render() {
-    const { bookToEdit } = this.props;
-    return (
-      Object.getOwnPropertyNames(bookToEdit).length === 0
-        ? (
+    const { listOfBooks } = this.props;
+    const bookToEdit = {};
+    const bookExistsPromise = new Promise((resolve) => {
+      listOfBooks.forEach((book) => {
+        if (book.index) {
+          Object.assign(bookToEdit, book);
+          resolve(bookToEdit);
+        }
+      });
+    });
+
+    return bookExistsPromise.then((result) => {
+      if (result.name !== undefined) {
+        return (
           <AddBookForm
             bookInfo={bookInfo}
             closeBtn={closeBtn}
             closeModalAndSaveBook={this.closeModalAndSaveBook}
             handleChange={this.handleChange}
             parentState={this.state}
-          />)
-        : (
-          <EditBookForm
-            bookInfo={bookInfo}
-            closeBtn={closeBtn}
-            closeModalAndSaveBook={this.closeModalAndSaveBook}
-            handleChange={this.handleChange}
-            parentState={this.state}
-            bookToEdit={bookToEdit}
-          />)
-    );
+          />
+        );
+      }
+      return (
+        <EditBookForm
+          bookInfo={bookInfo}
+          closeBtn={closeBtn}
+          closeModalAndSaveBook={this.closeModalAndSaveBook}
+          handleChange={this.handleChange}
+          parentState={this.state}
+          bookToEdit={bookToEdit}
+        />
+      );
+    });
   }
 }
 
 AddUpdateBook.propTypes = {
   closeModal: PropTypes.instanceOf(Function).isRequired,
   addBook: PropTypes.instanceOf(Function).isRequired,
-  bookToEdit: PropTypes.instanceOf(Object).isRequired,
+  updateBook: PropTypes.instanceOf(Function).isRequired,
+  listOfBooks: PropTypes.instanceOf(Array).isRequired,
 };
