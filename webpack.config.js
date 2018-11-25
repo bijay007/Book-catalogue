@@ -3,8 +3,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const confObject = {
   context: path.resolve(__dirname, 'client'),
-  name: 'main',
-  entry: './src/index.js',
+  entry: {
+    polyfill: 'babel-polyfill',
+    app: './src/index.js',
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js',

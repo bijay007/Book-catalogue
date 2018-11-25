@@ -16,14 +16,14 @@ export default class DynamicTBody extends PureComponent {
     books.deleteBook(index);
   }
 
-  removeGenre(bookId) {
+  removeGenre(index) {
     const { books } = this.props;
-    books.removeGenre(bookId);
+    books.removeGenre(index);
   }
 
-  editBook(bookId) {
+  editBook(index) {
     const { books } = this.props;
-    books.editBook(bookId);
+    books.editBook(index);
   }
 
   render() {

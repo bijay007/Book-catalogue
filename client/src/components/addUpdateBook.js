@@ -3,6 +3,7 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 import AddBookForm from './form/addBookForm';
 import EditBookForm from './form/editBookForm';
+import { findObjWithProp } from '../helpers/common';
 
 const bookInfo = css({
   display: 'flex',
@@ -69,39 +70,28 @@ export default class AddUpdateBook extends PureComponent {
 
   render() {
     const { listOfBooks } = this.props;
-    const bookToEdit = {};
-    const bookExistsPromise = new Promise((resolve) => {
-      listOfBooks.forEach((book) => {
-        if (book.index) {
-          Object.assign(bookToEdit, book);
-          resolve(bookToEdit);
-        }
-      });
-    });
-
-    return bookExistsPromise.then((result) => {
-      if (result.name !== undefined) {
-        return (
-          <AddBookForm
-            bookInfo={bookInfo}
-            closeBtn={closeBtn}
-            closeModalAndSaveBook={this.closeModalAndSaveBook}
-            handleChange={this.handleChange}
-            parentState={this.state}
-          />
-        );
-      }
+    const bookToEdit = findObjWithProp(listOfBooks, 'index');
+    if (bookToEdit.name === undefined) {
       return (
-        <EditBookForm
+        <AddBookForm
           bookInfo={bookInfo}
           closeBtn={closeBtn}
           closeModalAndSaveBook={this.closeModalAndSaveBook}
           handleChange={this.handleChange}
           parentState={this.state}
-          bookToEdit={bookToEdit}
         />
       );
-    });
+    }
+    return (
+      <EditBookForm
+        bookInfo={bookInfo}
+        closeBtn={closeBtn}
+        closeModalAndSaveBook={this.closeModalAndSaveBook}
+        handleChange={this.handleChange}
+        parentState={this.state}
+        bookToEdit={bookToEdit}
+      />
+    );
   }
 }
 
