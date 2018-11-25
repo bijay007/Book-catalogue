@@ -9,19 +9,13 @@ function findObjWithProp(arr, prop) {
   return requiredObj;
 }
 
-/* deletes a specified property from an object */
-function removePropFromObj(obj, propName) {
-  const objToUpdate = obj;
-  const props = Object.keys(objToUpdate);
-  for (let i = 0; i < props.length; i++) {
-    if (props[i] === propName) {
-      delete objToUpdate[props[i]];
-    }
-  }
-  return objToUpdate;
+/* returns an array without an object having a specified property */
+function removeObjFromArr(arr, propName) {
+  const newArr = arr.filter(obj => !Object.prototype.hasOwnProperty.call(obj, propName));
+  return newArr;
 }
 
 module.exports = {
   findObjWithProp,
-  removePropFromObj,
+  removeObjFromArr,
 };

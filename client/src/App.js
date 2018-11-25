@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import BookTable from './components/table/mainTable';
 import MainModal from './components/modal/mainModal';
 import AddUpdateBook from './components/addUpdateBook';
-import { removePropFromObj } from './helpers/common';
+import { removeObjFromArr } from './helpers/common';
 
 const container = css({
   display: 'flex',
@@ -93,9 +93,8 @@ export default class AppComponent extends Component {
 
   updateBook(book) {
     const { listOfBooks } = this.state;
-    const updatedBook = removePropFromObj(book, 'index');
-    listOfBooks.splice(updatedBook.index, 1, updatedBook);
-    this.setState({ listOfBooks: [...listOfBooks] }, () => this.displayBooks());
+    const updatedList = removeObjFromArr(listOfBooks, 'index');
+    this.setState({ listOfBooks: [...updatedList, book] }, () => this.displayBooks());
   }
 
   displayBooks() {
