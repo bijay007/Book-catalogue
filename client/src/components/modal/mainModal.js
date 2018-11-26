@@ -13,6 +13,7 @@ const modalBody = css({
   flexDirection: 'column',
   padding: '10px',
   fontSize: '15px',
+  boxShadow: '0 0 8px #ff8989',
 });
 
 const MainModal = (props) => {

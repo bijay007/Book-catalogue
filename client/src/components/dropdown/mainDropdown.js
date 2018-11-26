@@ -1,13 +1,23 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { css } from 'emotion';
 import { extractObjContainingValue } from '../../helpers/common';
+
+const dropDown = css({
+  height: '25px',
+  width: '170px',
+  marginLeft: '200px',
+  marginTop: '5px',
+  outline: 'none',
+  borderColor: '#9ecaed',
+  boxShadow: '0 0 10px #9ecaed',
+});
 
 export default class DropDownMenu extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       listOfGenre: [],
-      selected: 'Select',
     };
     this.selectResult = this.selectResult.bind(this);
   }
@@ -19,17 +29,19 @@ export default class DropDownMenu extends PureComponent {
   }
 
   selectResult(e) {
-    const { listOfBooks, showFilteredBooks } = this.props;
+    const { listOfBooks, showFilteredBooks, clearBookFilter } = this.props;
     const selectedGenre = e.target.value;
-    this.setState({ selected: selectedGenre });
     const booksWithSelectedGenre = extractObjContainingValue(listOfBooks, 'genre', selectedGenre);
-    showFilteredBooks(booksWithSelectedGenre);
+    return (selectedGenre === 'All Genre')
+      ? clearBookFilter()
+      : showFilteredBooks(booksWithSelectedGenre);
   }
 
   render() {
-    const { listOfGenre, selected } = this.state;
+    const { listOfGenre } = this.state;
     return (
-      <select className={selected} onChange={this.selectResult}>
+      <select className={dropDown} onChange={this.selectResult}>
+        <option value="All Genres">All Genres</option>
         {
           listOfGenre.map(
             (genre, index) => <option key={index.toString()} value={genre}>{genre}</option>,
@@ -43,4 +55,5 @@ export default class DropDownMenu extends PureComponent {
 DropDownMenu.propTypes = {
   listOfBooks: PropTypes.instanceOf(Array).isRequired,
   showFilteredBooks: PropTypes.instanceOf(Function).isRequired,
+  clearBookFilter: PropTypes.instanceOf(Function).isRequired,
 };

@@ -56,6 +56,7 @@ export default class AppComponent extends Component {
     this.closeModal = this.closeModal.bind(this);
     this.showAllBooks = this.showAllBooks.bind(this);
     this.showFilteredBooks = this.showFilteredBooks.bind(this);
+    this.clearBookFilter = this.clearBookFilter.bind(this);
     this.addBook = this.addBook.bind(this);
     this.deleteBook = this.deleteBook.bind(this);
     this.removeGenre = this.removeGenre.bind(this);
@@ -104,6 +105,10 @@ export default class AppComponent extends Component {
     this.setState({ filteredBooks: books });
   }
 
+  clearBookFilter() {
+    this.setState({ filteredBooks: [] });
+  }
+
   showAllBooks() {
     const { listOfBooks, filteredBooks } = this.state;
     return (
@@ -125,9 +130,11 @@ export default class AppComponent extends Component {
           <div className={image}>
             <img src="/client/public/assests/icons/main_logo.svg" alt="logo" className={image} />
           </div>
-          <div>
-            <DropDownMenu listOfBooks={listOfBooks} showFilteredBooks={this.showFilteredBooks} />
-          </div>
+          <DropDownMenu
+            listOfBooks={listOfBooks}
+            showFilteredBooks={this.showFilteredBooks}
+            clearBookFilter={this.clearBookFilter}
+          />
           <button type="button" className={addBtn} onClick={this.openModal}>
             <img src="/client/public/assests/icons/add_book.svg" alt="addbtn" className={image} />
           </button>

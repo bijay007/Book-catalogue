@@ -6,14 +6,28 @@ const bookInfo = css({
   display: 'flex',
   flexDirection: 'column',
   padding: '5px',
+  '& span': {
+    marginBottom: '2px',
+  },
+  '& input': {
+    marginBottom: '4px',
+    padding: '5px',
+    height: '25px',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: '#9ecaed',
+    boxShadow: '0 0 10px #9ecaed',
+  },
 });
 
 const closeBtn = css({
   border: '1px solid green',
-  fontSize: '18px bold',
-  margin: '5px auto',
-  padding: '5px',
+  margin: '20px auto 5px auto',
+  width: '100px',
+  padding: '8px',
+  fontWeight: 'bold',
 });
+
 export default class AddBookForm extends PureComponent {
   constructor(props) {
     super(props);
