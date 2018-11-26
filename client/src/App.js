@@ -4,6 +4,7 @@ import BookTable from './components/table/mainTable';
 import MainModal from './components/modal/mainModal';
 import AddUpdateBook from './components/addUpdateBook';
 import { removeObjFromArr } from './helpers/common';
+import DropDownMenu from './components/dropdown/mainDropdown';
 
 const container = css({
   display: 'flex',
@@ -117,6 +118,9 @@ export default class AppComponent extends Component {
         <div className={menu}>
           <div className={image}>
             <img src="/client/public/assests/icons/main_logo.svg" alt="logo" className={image} />
+          </div>
+          <div>
+            <DropDownMenu listOfBooks={listOfBooks} />
           </div>
           <button type="button" className={addBtn} onClick={this.openModal}>
             <img src="/client/public/assests/icons/add_book.svg" alt="addbtn" className={image} />
