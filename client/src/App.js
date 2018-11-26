@@ -12,7 +12,7 @@ const container = css({
   width: '550px',
   marginLeft: '150px',
   border: '2px solid blue',
-  boxShadow: '1px 1px 2px 1px',
+  boxShadow: '1px 1px 1px #ff3300',
 });
 const image = css({
   padding: '5px',

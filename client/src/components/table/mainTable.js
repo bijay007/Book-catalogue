@@ -12,8 +12,13 @@ const mainTable = css({
     borderBottom: '2px solid #000',
   },
   '& th': {
-    padding: '3px',
+    padding: '7px',
     border: '1px solid #000',
+    textShadow: '0.2px 0.2px 0.1px #4c4c4c',
+    fontSize: '16px',
+  },
+  '& th:last-child': {
+    borderRight: '0px',
   },
 });
 

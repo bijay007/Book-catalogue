@@ -12,12 +12,13 @@ const delGenre = css({
   height: 'auto',
 });
 const cellPadding = css({
-  padding: '5px',
+  padding: '6px',
   border: '1px solid #000',
 });
 const actions = css({
   display: 'flex',
   alignItems: 'center',
+  marginTop: '4px',
   justifyContent: 'space-evenly',
 });
 

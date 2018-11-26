@@ -1,5 +1,7 @@
+/* ************** ARRAY METHODS ************** */
+
 /* return an object from an array of object containing the specified property name */
-function findObjWithProp(arr, prop) {
+function findObjWithKey(arr, prop) {
   const requiredObj = {};
   arr.forEach((elem) => {
     if (Object.prototype.hasOwnProperty.call(elem, prop)) {
@@ -26,8 +28,19 @@ function extractObjContainingValue(arr, propName, value) {
   return newArr.filter(elem => !!elem);
 }
 
+/* extracts unique property names from an array of objects */
+function extractUniqKeys(arr, propName) {
+  const extractProps = arr.map(elem => elem[propName]).filter(elem => !!elem);
+  const uniqueArray = [...new Set(extractProps)];
+  return uniqueArray;
+}
+
+/* ************** OBJECT METHODS ************** */
+
+
 module.exports = {
-  findObjWithProp,
+  findObjWithKey,
   removeObjFromArr,
   extractObjContainingValue,
+  extractUniqKeys,
 };

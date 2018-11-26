@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
-import { extractObjContainingValue } from '../../helpers/common';
+import { extractObjContainingValue, extractUniqKeys } from '../../helpers/common';
 
 const dropDown = css({
+  zindex: 1000,
   height: '25px',
   width: '170px',
   marginLeft: '200px',
@@ -24,8 +25,8 @@ export default class DropDownMenu extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const { listOfBooks } = nextProps;
-    const allGenres = listOfBooks.map(book => book.genre).filter(elem => !!elem);
-    this.setState({ listOfGenre: [...allGenres] });
+    const extractedGenreArr = extractUniqKeys(listOfBooks, 'genre');
+    this.setState({ listOfGenre: [...extractedGenreArr] });
   }
 
   selectResult(e) {
