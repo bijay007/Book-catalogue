@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { extractObjContainingValue } from '../../helpers/common';
 
 export default class DropDownMenu extends PureComponent {
   constructor(props) {
@@ -18,8 +19,11 @@ export default class DropDownMenu extends PureComponent {
   }
 
   selectResult(e) {
-    console.log(e);
-    console.log(this.state);
+    const { listOfBooks, showFilteredBooks } = this.props;
+    const selectedGenre = e.target.value;
+    this.setState({ selected: selectedGenre });
+    const booksWithSelectedGenre = extractObjContainingValue(listOfBooks, 'genre', selectedGenre);
+    showFilteredBooks(booksWithSelectedGenre);
   }
 
   render() {
@@ -38,4 +42,5 @@ export default class DropDownMenu extends PureComponent {
 
 DropDownMenu.propTypes = {
   listOfBooks: PropTypes.instanceOf(Array).isRequired,
+  showFilteredBooks: PropTypes.instanceOf(Function).isRequired,
 };

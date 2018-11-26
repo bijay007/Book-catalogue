@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { css } from 'emotion';
 
 const edition = css({
@@ -20,24 +21,44 @@ const actions = css({
   justifyContent: 'space-evenly',
 });
 
-const DisplayBooks = (props) => {
-  const {
-    books, deleteBook, removeGenre, editBook,
-  } = props;
-  return books.map((book, index) => (
-    <tr key={(book + index).toString()}>
-      <td className={cellPadding}>{book.name}</td>
-      <td className={cellPadding}>{book.genre}</td>
-      <td className={cellPadding}>{book.price}</td>
-      <td className={cellPadding}>
-        <div className={actions}>
-          <img className={edition} onClick={() => editBook(index)} role="presentation" src="/client/public/assests/icons/edit_book.svg" alt="edit book" />
-          <img className={edition} onClick={() => deleteBook(index)} role="presentation" src="/client/public/assests/icons/delete_book.svg" alt="delete book" />
-          <img className={delGenre} onClick={() => removeGenre(index)} role="presentation" src="/client/public/assests/icons/delete_genre.png" alt="delete book" />
-        </div>
-      </td>
-    </tr>
-  ));
-};
+export default class DisplayBooks extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      listOfBooks: props.books,
+    };
+  }
 
-export default DisplayBooks;
+  componentWillReceiveProps(newProps) {
+    const { books } = newProps;
+    this.setState({ listOfBooks: [...books] });
+  }
+
+  render() {
+    const {
+      deleteBook, removeGenre, editBook,
+    } = this.props;
+    const { listOfBooks } = this.state;
+    return listOfBooks.map((book, index) => (
+      <tr key={(book + index).toString()}>
+        <td className={cellPadding}>{book.name}</td>
+        <td className={cellPadding}>{book.genre}</td>
+        <td className={cellPadding}>{book.price}</td>
+        <td className={cellPadding}>
+          <div className={actions}>
+            <img className={edition} onClick={() => editBook(index)} role="presentation" src="/client/public/assests/icons/edit_book.svg" alt="edit book" />
+            <img className={edition} onClick={() => deleteBook(index)} role="presentation" src="/client/public/assests/icons/delete_book.svg" alt="delete book" />
+            <img className={delGenre} onClick={() => removeGenre(index)} role="presentation" src="/client/public/assests/icons/delete_genre.png" alt="delete book" />
+          </div>
+        </td>
+      </tr>
+    ));
+  }
+}
+
+DisplayBooks.propTypes = {
+  books: PropTypes.instanceOf(Array).isRequired,
+  deleteBook: PropTypes.instanceOf(Function).isRequired,
+  removeGenre: PropTypes.instanceOf(Function).isRequired,
+  editBook: PropTypes.instanceOf(Function).isRequired,
+};

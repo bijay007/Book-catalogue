@@ -49,11 +49,13 @@ export default class AppComponent extends Component {
     super();
     this.state = {
       listOfBooks: [],
+      filteredBooks: [],
       showModal: false,
     };
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.displayBooks = this.displayBooks.bind(this);
+    this.showAllBooks = this.showAllBooks.bind(this);
+    this.showFilteredBooks = this.showFilteredBooks.bind(this);
     this.addBook = this.addBook.bind(this);
     this.deleteBook = this.deleteBook.bind(this);
     this.removeGenre = this.removeGenre.bind(this);
@@ -71,7 +73,7 @@ export default class AppComponent extends Component {
 
   addBook(book) {
     const { listOfBooks } = this.state;
-    this.setState({ listOfBooks: [...listOfBooks, book] }, () => this.displayBooks());
+    this.setState({ listOfBooks: [...listOfBooks, book] }, () => this.showAllBooks());
   }
 
   deleteBook(index) {
@@ -95,14 +97,18 @@ export default class AppComponent extends Component {
   updateBook(book) {
     const { listOfBooks } = this.state;
     const updatedList = removeObjFromArr(listOfBooks, 'index');
-    this.setState({ listOfBooks: [...updatedList, book] }, () => this.displayBooks());
+    this.setState({ listOfBooks: [...updatedList, book] }, () => this.showAllBooks());
   }
 
-  displayBooks() {
-    const { listOfBooks } = this.state;
+  showFilteredBooks(books) {
+    this.setState({ filteredBooks: books });
+  }
+
+  showAllBooks() {
+    const { listOfBooks, filteredBooks } = this.state;
     return (
       <BookTable
-        books={listOfBooks}
+        books={filteredBooks.length ? filteredBooks : listOfBooks}
         deleteBook={this.deleteBook}
         removeGenre={this.removeGenre}
         editBook={this.editBook}
@@ -112,7 +118,7 @@ export default class AppComponent extends Component {
 
   render() {
     const { showModal, listOfBooks } = this.state;
-    const showBooks = this.displayBooks();
+    const bookListView = this.showAllBooks();
     return (
       <div className={container}>
         <div className={menu}>
@@ -120,7 +126,7 @@ export default class AppComponent extends Component {
             <img src="/client/public/assests/icons/main_logo.svg" alt="logo" className={image} />
           </div>
           <div>
-            <DropDownMenu listOfBooks={listOfBooks} />
+            <DropDownMenu listOfBooks={listOfBooks} showFilteredBooks={this.showFilteredBooks} />
           </div>
           <button type="button" className={addBtn} onClick={this.openModal}>
             <img src="/client/public/assests/icons/add_book.svg" alt="addbtn" className={image} />
@@ -137,7 +143,7 @@ export default class AppComponent extends Component {
           </MainModal>
         </div>
         <div className={contents}>
-          { showBooks }
+          { bookListView }
         </div>
       </div>
     );

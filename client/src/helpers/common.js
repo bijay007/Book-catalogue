@@ -1,4 +1,4 @@
-/* finds an object from an array of object containing the specified prop */
+/* return an object from an array of object containing the specified property name */
 function findObjWithProp(arr, prop) {
   const requiredObj = {};
   arr.forEach((elem) => {
@@ -9,13 +9,25 @@ function findObjWithProp(arr, prop) {
   return requiredObj;
 }
 
-/* returns an array without an object having a specified property */
+/* returns an array excluding an object having a specified property */
 function removeObjFromArr(arr, propName) {
   const newArr = arr.filter(obj => !Object.prototype.hasOwnProperty.call(obj, propName));
   return newArr;
 }
 
+/* returns an array of objects that has a specific value for the provided property name */
+function extractObjContainingValue(arr, propName, value) {
+  const newArr = arr.map((elem) => {
+    if (elem[propName] === value) {
+      return elem;
+    }
+    return undefined;
+  });
+  return newArr.filter(elem => !!elem);
+}
+
 module.exports = {
   findObjWithProp,
   removeObjFromArr,
+  extractObjContainingValue,
 };
