@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from "redux";
 import { css } from 'emotion';
 import BookTable from './components/table/mainTable';
 import MainModal from './components/modal/mainModal';
@@ -45,8 +43,6 @@ const hidden = css({
 const contents = css({
   display: 'flex',
 });
-
-const store = createStore(() => [], {}, applyMiddleware());
 
 export default class AppComponent extends Component {
   constructor() {
@@ -129,36 +125,34 @@ export default class AppComponent extends Component {
     const { showModal, listOfBooks } = this.state;
     const bookListView = this.showAllBooks();
     return (
-      <Provider store={store}>
-        <div className={container}>
-          <div className={menu}>
-            <div className={image}>
-              <img src="/client/public/assests/icons/main_logo.svg" alt="logo" className={image} />
-            </div>
-            <DropDownMenu
-              listOfBooks={listOfBooks}
-              showFilteredBooks={this.showFilteredBooks}
-              clearBookFilter={this.clearBookFilter}
-            />
-            <button type="button" className={addBtn} onClick={this.openModal}>
-              <img src="/client/public/assests/icons/add_book.svg" alt="addbtn" className={image} />
-            </button>
+      <div className={container}>
+        <div className={menu}>
+          <div className={image}>
+            <img src="/client/public/assests/icons/main_logo.svg" alt="logo" className={image} />
           </div>
-          <div className={showModal ? visible : hidden}>
-            <MainModal>
-              <AddUpdateBook
-                closeModal={this.closeModal}
-                addBook={this.addBook}
-                updateBook={this.updateBook}
-                listOfBooks={listOfBooks}
-              />
-            </MainModal>
-          </div>
-          <div className={contents}>
-            { bookListView }
-          </div>
+          <DropDownMenu
+            listOfBooks={listOfBooks}
+            showFilteredBooks={this.showFilteredBooks}
+            clearBookFilter={this.clearBookFilter}
+          />
+          <button type="button" className={addBtn} onClick={this.openModal}>
+            <img src="/client/public/assests/icons/add_book.svg" alt="addbtn" className={image} />
+          </button>
         </div>
-      </Provider>
+        <div className={showModal ? visible : hidden}>
+          <MainModal>
+            <AddUpdateBook
+              closeModal={this.closeModal}
+              addBook={this.addBook}
+              updateBook={this.updateBook}
+              listOfBooks={listOfBooks}
+            />
+          </MainModal>
+        </div>
+        <div className={contents}>
+          { bookListView }
+        </div>
+      </div>
     );
   }
 }
