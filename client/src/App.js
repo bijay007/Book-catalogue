@@ -1,48 +1,12 @@
 import React, { Component } from 'react';
-import { css } from 'emotion';
-import BookTable from './components/table/mainTable';
+import TableHeader from './components/table/tableHeader';
 import MainModal from './components/modal/mainModal';
 import AddUpdateBook from './components/addUpdateBook';
-import { removeObjFromArr } from './helpers/common';
+import { removeObjFromArr } from './common/helpers';
 import DropDownMenu from './components/dropdown/mainDropdown';
-
-const container = css({
-  display: 'flex',
-  flexDirection: 'column',
-  width: '550px',
-  marginLeft: '150px',
-  border: '2px solid blue',
-  boxShadow: '1px 1px 1px #ff3300',
-});
-const image = css({
-  padding: '5px',
-  maxWidth: '40px',
-});
-const menu = css({
-  display: 'flex',
-  flexFlow: 'row nowrap',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  padding: '10px',
-});
-const addBtn = css({
-  border: 'none',
-  background: 'none',
-});
-const visible = css({
-  position: 'fixed',
-  top: '0',
-  left: '0',
-  width: '100%',
-  height: '100%',
-  background: 'rgba(0, 0, 0, 0.6)',
-});
-const hidden = css({
-  display: 'none',
-});
-const contents = css({
-  display: 'flex',
-});
+import {
+  appContainer, appMenu, menuImage, modalVisibility, transparentBtn,
+} from './common/styles';
 
 export default class AppComponent extends Component {
   constructor() {
@@ -112,7 +76,7 @@ export default class AppComponent extends Component {
   showAllBooks() {
     const { listOfBooks, filteredBooks } = this.state;
     return (
-      <BookTable
+      <TableHeader
         books={filteredBooks.length ? filteredBooks : listOfBooks}
         deleteBook={this.deleteBook}
         removeGenre={this.removeGenre}
@@ -125,21 +89,21 @@ export default class AppComponent extends Component {
     const { showModal, listOfBooks } = this.state;
     const bookListView = this.showAllBooks();
     return (
-      <div className={container}>
-        <div className={menu}>
-          <div className={image}>
-            <img src="/client/public/assests/icons/main_logo.svg" alt="logo" className={image} />
+      <div className={appContainer}>
+        <div className={appMenu}>
+          <div className={menuImage}>
+            <img src="/client/public/assests/icons/main_logo.svg" alt="logo" className={menuImage} />
           </div>
           <DropDownMenu
             listOfBooks={listOfBooks}
             showFilteredBooks={this.showFilteredBooks}
             clearBookFilter={this.clearBookFilter}
           />
-          <button type="button" className={addBtn} onClick={this.openModal}>
-            <img src="/client/public/assests/icons/add_book.svg" alt="addbtn" className={image} />
+          <button type="button" className={transparentBtn} onClick={this.openModal}>
+            <img src="/client/public/assests/icons/add_book.svg" alt="Add book" className={menuImage} />
           </button>
         </div>
-        <div className={showModal ? visible : hidden}>
+        <div className={showModal ? modalVisibility.visible : modalVisibility.hidden}>
           <MainModal>
             <AddUpdateBook
               closeModal={this.closeModal}
@@ -149,7 +113,7 @@ export default class AppComponent extends Component {
             />
           </MainModal>
         </div>
-        <div className={contents}>
+        <div style={{ display: 'flex' }}>
           { bookListView }
         </div>
       </div>

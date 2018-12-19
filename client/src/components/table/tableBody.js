@@ -1,13 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'emotion';
 import DisplayBooks from './tableContents/displayBooks';
 import DisplayNoBookEmoji from './tableContents/displayNoBookEmoji';
 
-const spinner = css({
-  width: 'auto',
-  height: '32px',
-});
 export default class DynamicTBody extends PureComponent {
   constructor(props) {
     super(props);
@@ -23,7 +18,7 @@ export default class DynamicTBody extends PureComponent {
     const showSpinner = () => (
       <tr>
         <td>
-          <img className={spinner} alt="spinner" src="../../client/public/assests/icons/spinner.svg" />
+          <img style={{ width: 'auto', height: '32px' }} alt="spinner" src="../../client/public/assests/icons/spinner.svg" />
         </td>
       </tr>
     );

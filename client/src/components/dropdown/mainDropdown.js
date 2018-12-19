@@ -1,18 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'emotion';
-import { extractObjContainingValue, extractUniqKeys } from '../../helpers/common';
-
-const dropDown = css({
-  zindex: 1000,
-  height: '25px',
-  width: '170px',
-  marginLeft: '200px',
-  marginTop: '5px',
-  outline: 'none',
-  borderColor: '#9ecaed',
-  boxShadow: '0 0 10px #9ecaed',
-});
+import { extractObjContainingValue, extractUniqKeys } from '../../common/helpers';
+import { dropDownBody } from '../../common/styles';
 
 export default class DropDownMenu extends PureComponent {
   constructor(props) {
@@ -41,7 +30,7 @@ export default class DropDownMenu extends PureComponent {
   render() {
     const { listOfGenre } = this.state;
     return (
-      <select className={dropDown} onChange={this.selectResult}>
+      <select className={dropDownBody} onChange={this.selectResult}>
         <option value="All Genres">All Genres</option>
         {
           listOfGenre.map(

@@ -1,32 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'emotion';
-
-const bookInfo = css({
-  display: 'flex',
-  flexDirection: 'column',
-  padding: '5px',
-  '& span': {
-    marginBottom: '2px',
-  },
-  '& input': {
-    marginBottom: '4px',
-    padding: '5px',
-    height: '25px',
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: '#9ecaed',
-    boxShadow: '0 0 10px #9ecaed',
-  },
-});
-
-const closeBtn = css({
-  border: '1px solid green',
-  margin: '20px auto 5px auto',
-  width: '100px',
-  padding: '8px',
-  fontWeight: 'bold',
-});
+import { formBody } from '../../common/styles';
 
 export default class AddBookForm extends PureComponent {
   constructor(props) {
@@ -76,14 +50,14 @@ export default class AddBookForm extends PureComponent {
       name, genre, price, valid,
     } = this.state;
     return (
-      <form className={bookInfo} onSubmit={this.closeModalAndSaveBook}>
+      <form className={formBody.bookInfo} onSubmit={this.closeModalAndSaveBook}>
         <span>Name</span>
         <input type="text" value={name} name="name" placeholder="Name of the book" onChange={this.handleChange} />
         <span>Genre</span>
         <input type="genre" value={genre} name="genre" placeholder="Genre of the book" onChange={this.handleChange} />
         <span>Price</span>
         <input type="number" value={price} name="price" min="0" placeholder="Price in euros" onChange={this.handleChange} />
-        <button type="submit" disabled={!valid} className={closeBtn}>Save</button>
+        <button type="submit" disabled={!valid} className={formBody.closeBtn}>Save</button>
       </form>
     );
   }

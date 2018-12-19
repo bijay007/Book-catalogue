@@ -1,13 +1,9 @@
 import React from 'react';
-import { css } from 'emotion';
 
-const noItem = css({
-  padding: '5px',
-});
 const DisplayNoBookEmoji = () => (
   <tr>
     <td>
-      <div className={noItem}>
+      <div style={{ padding: '5px' }}>
         <span role="img" aria-label="sad-face">😔</span>
       </div>
     </td>
