@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TableHeader from './components/table/tableHeader';
 import MainModal from './components/modal/mainModal';
-import AddUpdateBook from './components/addUpdateBook';
+import AddUpdateBook from './components/form/addUpdateBook';
 import { removeObjFromArr } from './common/helpers';
 import DropDownMenu from './components/dropdown/mainDropdown';
 import {
@@ -89,8 +89,8 @@ export default class AppComponent extends Component {
     const { showModal, listOfBooks } = this.state;
     const bookListView = this.showAllBooks();
     return (
-      <div className={appContainer}>
-        <div className={appMenu}>
+      <main className={appContainer}>
+        <header className={appMenu}>
           <div className={menuImage}>
             <img src="/client/public/assests/icons/main_logo.svg" alt="logo" className={menuImage} />
           </div>
@@ -102,7 +102,7 @@ export default class AppComponent extends Component {
           <button type="button" className={transparentBtn} onClick={this.openModal}>
             <img src="/client/public/assests/icons/add_book.svg" alt="Add book" className={menuImage} />
           </button>
-        </div>
+        </header>
         <div className={showModal ? modalVisibility.visible : modalVisibility.hidden}>
           <MainModal>
             <AddUpdateBook
@@ -113,10 +113,10 @@ export default class AppComponent extends Component {
             />
           </MainModal>
         </div>
-        <div style={{ display: 'flex' }}>
+        <section style={{ display: 'flex' }}>
           { bookListView }
-        </div>
-      </div>
+        </section>
+      </main>
     );
   }
 }

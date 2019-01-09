@@ -1,7 +1,7 @@
 import React from 'react';
-import AddBookForm from './form/addBookForm';
-import EditBookForm from './form/editBookForm';
-import { findObjWithKey } from '../common/helpers';
+import AddBookForm from './addBookForm';
+import EditBookForm from './editBookForm';
+import { findObjWithKey } from '../../common/helpers';
 
 const AddUpdateBook = (props) => {
   const {

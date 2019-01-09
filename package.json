@@ -7,8 +7,10 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "lint": "eslint .",
     "serve:dev": "webpack-dev-server --hot --inline",
-    "build:dev": "webpack --mode development"
+    "build:dev": "webpack --mode development",
+    "start": "npm run build:dev && npm run serve:dev"
   },
   "engines": {
     "node": ">=8 <11"
