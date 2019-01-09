@@ -1,8 +1,8 @@
 import React from 'react';
-import DynamicTBody from './tableBody';
+import DynamicTBody from './innerTable';
 import { outerTableBody } from '../../common/styles';
 
-const TableHeaders = props => (
+const OuterTable = props => (
   <table className={outerTableBody}>
     <thead className="head">
       <tr>
@@ -20,4 +20,4 @@ const TableHeaders = props => (
   </table>
 );
 
-export default TableHeaders;
+export default OuterTable;

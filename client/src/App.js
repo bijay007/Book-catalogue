@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import TableHeader from './components/table/tableHeader';
-import MainModal from './components/modal/mainModal';
-import AddUpdateBook from './components/form/addUpdateBook';
+import OuterTable from './components/table/outerTable';
+import OuterModal from './components/modal/outerModal';
+import AddUpdateBook from './components/form/selectAddEditForm';
 import { removeObjFromArr } from './common/helpers';
 import DropDownMenu from './components/dropdown/mainDropdown';
 import {
@@ -76,7 +76,7 @@ export default class AppComponent extends Component {
   showAllBooks() {
     const { listOfBooks, filteredBooks } = this.state;
     return (
-      <TableHeader
+      <OuterTable
         books={filteredBooks.length ? filteredBooks : listOfBooks}
         deleteBook={this.deleteBook}
         removeGenre={this.removeGenre}
@@ -104,14 +104,14 @@ export default class AppComponent extends Component {
           </button>
         </header>
         <div className={showModal ? modalVisibility.visible : modalVisibility.hidden}>
-          <MainModal>
+          <OuterModal>
             <AddUpdateBook
               closeModal={this.closeModal}
               addBook={this.addBook}
               updateBook={this.updateBook}
               listOfBooks={listOfBooks}
             />
-          </MainModal>
+          </OuterModal>
         </div>
         <section style={{ display: 'flex' }}>
           { bookListView }

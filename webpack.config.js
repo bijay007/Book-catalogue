@@ -13,6 +13,11 @@ const confObject = {
   },
   mode: 'development',
   devtool: 'inline-source-map',
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
   module: {
     rules: [
       {

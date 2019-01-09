@@ -1,7 +1,7 @@
 import React from 'react';
 import { modalBody } from '../../common/styles';
 
-const MainModal = (props) => {
+const OuterModal = (props) => {
   const itemPassed = props;
   return (
     <div className={modalBody}>
@@ -10,4 +10,4 @@ const MainModal = (props) => {
   );
 };
 
-export default MainModal;
+export default OuterModal;
