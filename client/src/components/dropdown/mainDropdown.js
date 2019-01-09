@@ -43,7 +43,7 @@ export default class DropDownMenu extends PureComponent {
 }
 
 DropDownMenu.propTypes = {
-  listOfBooks: PropTypes.instanceOf(Array).isRequired,
-  showFilteredBooks: PropTypes.instanceOf(Function).isRequired,
-  clearBookFilter: PropTypes.instanceOf(Function).isRequired,
+  listOfBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  showFilteredBooks: PropTypes.func.isRequired,
+  clearBookFilter: PropTypes.func.isRequired,
 };

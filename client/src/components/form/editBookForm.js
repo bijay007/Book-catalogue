@@ -73,7 +73,9 @@ export default class EditBookForm extends PureComponent {
 }
 
 EditBookForm.propTypes = {
-  bookToEdit: PropTypes.instanceOf(Object).isRequired,
-  closeModal: PropTypes.instanceOf(Function).isRequired,
-  updateBook: PropTypes.instanceOf(Function).isRequired,
+  bookToEdit: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  closeModal: PropTypes.func.isRequired,
+  updateBook: PropTypes.func.isRequired,
 };

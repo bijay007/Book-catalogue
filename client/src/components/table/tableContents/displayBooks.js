@@ -38,8 +38,8 @@ export default class DisplayBooks extends PureComponent {
 }
 
 DisplayBooks.propTypes = {
-  books: PropTypes.instanceOf(Array).isRequired,
-  deleteBook: PropTypes.instanceOf(Function).isRequired,
-  removeGenre: PropTypes.instanceOf(Function).isRequired,
-  editBook: PropTypes.instanceOf(Function).isRequired,
+  books: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteBook: PropTypes.func.isRequired,
+  removeGenre: PropTypes.func.isRequired,
+  editBook: PropTypes.func.isRequired,
 };

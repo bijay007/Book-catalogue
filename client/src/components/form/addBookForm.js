@@ -64,6 +64,6 @@ export default class AddBookForm extends PureComponent {
 }
 
 AddBookForm.propTypes = {
-  closeModal: PropTypes.instanceOf(Function).isRequired,
-  addBook: PropTypes.instanceOf(Function).isRequired,
+  closeModal: PropTypes.func.isRequired,
+  addBook: PropTypes.func.isRequired,
 };

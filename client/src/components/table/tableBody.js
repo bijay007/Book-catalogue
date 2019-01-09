@@ -64,5 +64,5 @@ export default class DynamicTBody extends PureComponent {
 }
 
 DynamicTBody.propTypes = {
-  books: PropTypes.instanceOf(Object).isRequired,
+  books: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
