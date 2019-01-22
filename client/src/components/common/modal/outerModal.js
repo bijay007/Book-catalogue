@@ -1,5 +1,5 @@
 import React from 'react';
-import { modalBody } from '../../common/styles';
+import { modalBody } from '../../../common/styles';
 
 const OuterModal = (props) => {
   const itemPassed = props;

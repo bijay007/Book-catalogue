@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import OuterTable from './components/table/outerTable';
-import OuterModal from './components/modal/outerModal';
+import OuterModal from './components/common/modal/outerModal';
 import AddUpdateBook from './components/form/selectAddEditForm';
 import { removeObjFromArr } from './common/helpers';
 import DropDownMenu from './components/dropdown/mainDropdown';

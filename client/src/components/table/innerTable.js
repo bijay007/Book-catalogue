@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import DisplayBooks from './tableContents/displayBooks';
 import DisplayNoBookEmoji from './tableContents/displayNoBookEmoji';
-import Spinner from '../spinner/mainSpinner';
+import Spinner from '../common/spinner/mainSpinner';
 
 export default class DynamicTBody extends PureComponent {
   constructor(props) {

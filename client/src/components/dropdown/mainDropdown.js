@@ -22,9 +22,11 @@ export default class DropDownMenu extends PureComponent {
     const { listOfBooks, showFilteredBooks, clearBookFilter } = this.props;
     const selectedGenre = e.target.value;
     const booksWithSelectedGenre = extractObjContainingValue(listOfBooks, 'genre', selectedGenre);
-    return (selectedGenre === 'All Genre')
-      ? clearBookFilter()
-      : showFilteredBooks(booksWithSelectedGenre);
+    if (selectedGenre === 'All Genre') {
+      clearBookFilter();
+    } else {
+      showFilteredBooks(booksWithSelectedGenre);
+    }
   }
 
   render() {
