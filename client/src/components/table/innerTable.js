@@ -2,32 +2,22 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import DisplayBooks from './tableContents/displayBooks';
 import DisplayNoBookEmoji from './tableContents/displayNoBookEmoji';
+import Spinner from '../spinner/mainSpinner';
 
 export default class DynamicTBody extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      oldData: '',
+      oldData: <Spinner />,
     };
     this.deleteBook = this.deleteBook.bind(this);
     this.removeGenre = this.removeGenre.bind(this);
     this.editBook = this.editBook.bind(this);
   }
 
-  componentWillMount() {
-    const showSpinner = () => (
-      <tr>
-        <td>
-          <img style={{ width: 'auto', height: '32px' }} alt="spinner" src="../../client/public/assests/icons/spinner.svg" />
-        </td>
-      </tr>
-    );
-    this.setState({ oldData: showSpinner() });
-  }
-
   componentDidMount() {
-    const showBooksFetched = () => this.setState({ oldData: <DisplayNoBookEmoji /> });
-    return setTimeout(showBooksFetched, 2500);
+    const waitFakeBookFetch = () => this.setState({ oldData: <DisplayNoBookEmoji /> });
+    return setTimeout(waitFakeBookFetch, 2500);
   }
 
   deleteBook(index) {

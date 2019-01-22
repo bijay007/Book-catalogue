@@ -29,6 +29,9 @@ export default class DropDownMenu extends PureComponent {
 
   render() {
     const { listOfGenre } = this.state;
+    if (!listOfGenre.length) {
+      return null;
+    }
     return (
       <select className={dropDownBody} onChange={this.selectResult}>
         <option value="All Genres">All Genres</option>
