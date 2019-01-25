@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import OuterTable from './components/table/outerTable';
-import OuterModal from './components/common/modal/outerModal';
 import AddUpdateBook from './components/form/selectAddEditForm';
 import { removeObjFromArr } from './common/helpers';
 import DropDownMenu from './components/dropdown/mainDropdown';
 import {
-  appContainer, appMenu, menuImage, modalVisibility, transparentBtn,
+  appContainer, appMenu, menuImage, transparentBtn,
 } from './common/styles';
+import ModalWrapper from './components/common/modal/modalWrapper';
 
 export default class AppComponent extends Component {
   constructor() {
@@ -103,19 +103,15 @@ export default class AppComponent extends Component {
             <img src="/client/public/assests/icons/add_book.svg" alt="Add book" className={menuImage} />
           </button>
         </header>
-        <div className={showModal ? modalVisibility.visible : modalVisibility.hidden}>
-          <OuterModal>
-            <AddUpdateBook
-              closeModal={this.closeModal}
-              addBook={this.addBook}
-              updateBook={this.updateBook}
-              listOfBooks={listOfBooks}
-            />
-          </OuterModal>
-        </div>
-        <section style={{ display: 'flex' }}>
-          { bookListView }
-        </section>
+        <ModalWrapper showModal={showModal}>
+          <AddUpdateBook
+            closeModal={this.closeModal}
+            addBook={this.addBook}
+            updateBook={this.updateBook}
+            listOfBooks={listOfBooks}
+          />
+        </ModalWrapper>
+        { bookListView }
       </main>
     );
   }

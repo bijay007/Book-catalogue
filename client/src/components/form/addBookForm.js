@@ -18,12 +18,14 @@ export default class AddBookForm extends PureComponent {
 
   validateForm() {
     const { name } = this.state;
-    return name !== '' ? this.setState({ valid: true }) : this.setState({ valid: false });
+    return name === ''
+      ? this.setState({ valid: false })
+      : this.setState({ valid: true });
   }
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value }, () => {
-      this.validateForm();
+      this.validateForm(); // validation should be cb so user can't save immediately after changes
     });
   }
 
@@ -33,16 +35,15 @@ export default class AddBookForm extends PureComponent {
     } = this.state;
     const { closeModal, addBook } = this.props;
     event.preventDefault();
-    this.validateForm();
     if (valid) {
-      closeModal();
       addBook({
         name, genre, price,
       });
+      this.setState({
+        name: '', genre: '', price: '', valid: false,
+      });
+      closeModal();
     }
-    this.setState({
-      name: '', genre: '', price: '', valid: false,
-    });
   }
 
   render() {

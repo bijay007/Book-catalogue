@@ -24,6 +24,15 @@ const menuImage = css({
   maxWidth: '40px',
 });
 
+const modalContainer = css({
+  position: 'fixed',
+  top: '0',
+  left: '0',
+  width: '100%',
+  height: '100%',
+  background: 'rgba(0, 0, 0, 0.6)',
+});
+
 const modalBody = css({
   position: 'fixed',
   background: '#fff',
@@ -120,20 +129,6 @@ const innerTBody = {
   }),
 };
 
-const modalVisibility = {
-  visible: css({
-    position: 'fixed',
-    top: '0',
-    left: '0',
-    width: '100%',
-    height: '100%',
-    background: 'rgba(0, 0, 0, 0.6)',
-  }),
-  hidden: css({
-    display: 'none',
-  }),
-};
-
 const transparentBtn = css({
   border: 'none',
   background: 'none',
@@ -144,11 +139,11 @@ export {
   appContainer,
   appMenu,
   menuImage,
+  modalContainer,
   modalBody,
   formBody,
   dropDownBody,
   outerTableBody,
   innerTBody,
-  modalVisibility,
   transparentBtn,
 };
