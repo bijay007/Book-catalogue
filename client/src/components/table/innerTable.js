@@ -4,7 +4,7 @@ import DisplayBooks from './tableContents/displayBooks';
 import DisplayNoBookEmoji from './tableContents/displayNoBookEmoji';
 import Spinner from '../common/spinner/mainSpinner';
 
-export default class DynamicTBody extends PureComponent {
+export default class TableContents extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,7 +53,7 @@ export default class DynamicTBody extends PureComponent {
   }
 }
 
-DynamicTBody.propTypes = {
+TableContents.propTypes = {
   books: PropTypes.shape({
     books: PropTypes.instanceOf(Array).isRequired,
   }).isRequired,

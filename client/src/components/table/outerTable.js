@@ -1,5 +1,5 @@
 import React from 'react';
-import DynamicTBody from './innerTable';
+import TableContents from './innerTable';
 import { outerTableBody } from '../../common/styles';
 
 const OuterTable = props => (
@@ -14,7 +14,7 @@ const OuterTable = props => (
     </thead>
     {
       <tbody>
-        <DynamicTBody books={props} />
+        <TableContents books={props} />
       </tbody>
     }
   </table>
