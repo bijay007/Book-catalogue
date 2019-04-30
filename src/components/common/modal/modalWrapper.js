@@ -1,5 +1,5 @@
 import React from 'react';
-import { modalContainer, modalBody } from '../../../common/styles';
+import { modalContainer, modalBody } from '@styles/styles';
 
 const ModalWrapper = (props) => {
   const itemPassed = props;

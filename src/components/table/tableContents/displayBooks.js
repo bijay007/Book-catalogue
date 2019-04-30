@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { innerTBody } from '../../../common/styles';
+import { innerTBody } from '@styles/styles';
 
 export default class DisplayBooks extends PureComponent {
   constructor(props) {
@@ -27,9 +27,9 @@ export default class DisplayBooks extends PureComponent {
         <td className={innerTBody.cellPadding}>{book.price}</td>
         <td className={innerTBody.cellPadding}>
           <div className={innerTBody.actions}>
-            <img className={innerTBody.edition} onClick={() => editBook(index)} role="presentation" src="/client/public/assests/icons/edit_book.svg" alt="edit book" />
-            <img className={innerTBody.edition} onClick={() => deleteBook(index)} role="presentation" src="/client/public/assests/icons/delete_book.svg" alt="delete book" />
-            <img className={innerTBody.delGenre} onClick={() => removeGenre(index)} role="presentation" src="/client/public/assests/icons/delete_genre.png" alt="delete book" />
+            <img className={innerTBody.edition} onClick={() => editBook(index)} role="presentation" src="/public/assests/icons/edit_book.svg" alt="edit book" />
+            <img className={innerTBody.edition} onClick={() => deleteBook(index)} role="presentation" src="/public/assests/icons/delete_book.svg" alt="delete book" />
+            <img className={innerTBody.delGenre} onClick={() => removeGenre(index)} role="presentation" src="/public/assests/icons/delete_genre.png" alt="delete book" />
           </div>
         </td>
       </tr>

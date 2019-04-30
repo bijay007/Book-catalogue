@@ -9,10 +9,18 @@
     "rules": {
         "no-console": "off",
         "react/jsx-filename-extension": [0],
-        "no-plusplus": [2, { "allowForLoopAfterthoughts": true }]
+        "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
+        "import/no-extraneous-dependencies": "off"
     },
     "env": {
         "browser": true,
         "node": true
+    },
+    "settings": {
+        "import/resolver": {
+          "webpack": {
+            "config": "webpack.config.js"
+          }
+        }
     }
 }

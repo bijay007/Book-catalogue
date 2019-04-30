@@ -6,7 +6,7 @@ const Spinner = (props) => {
   return (
     <tr>
       <td>
-        <img style={{ width: 'auto', height: `${height}px` }} alt="spinner" src="../../client/public/assests/icons/spinner.svg" />
+        <img style={{ width: 'auto', height: `${height}px` }} alt="spinner" src="../../public/assests/icons/spinner.svg" />
       </td>
     </tr>
   );

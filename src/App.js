@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import {
+  appContainer, appMenu, menuImage, transparentBtn,
+} from '@styles/styles';
 import OuterTable from './components/table/outerTable';
 import AddUpdateBook from './components/form/selectAddEditForm';
 import { removeObjFromArr } from './common/helpers';
 import DropDownMenu from './components/dropdown/mainDropdown';
-import {
-  appContainer, appMenu, menuImage, transparentBtn,
-} from './common/styles';
 import ModalWrapper from './components/common/modal/modalWrapper';
 
 export default class AppComponent extends Component {
@@ -92,7 +92,7 @@ export default class AppComponent extends Component {
       <main className={appContainer}>
         <header className={appMenu}>
           <div className={menuImage}>
-            <img src="/client/public/assests/icons/main_logo.svg" alt="logo" className={menuImage} />
+            <img src="/public/assests/icons/main_logo.svg" alt="logo" className={menuImage} />
           </div>
           <DropDownMenu
             listOfBooks={listOfBooks}
@@ -100,7 +100,7 @@ export default class AppComponent extends Component {
             clearBookFilter={this.clearBookFilter}
           />
           <button type="button" className={transparentBtn} onClick={this.openModal}>
-            <img src="/client/public/assests/icons/add_book.svg" alt="Add book" className={menuImage} />
+            <img src="/public/assests/icons/add_book.svg" alt="Add book" className={menuImage} />
           </button>
         </header>
         <ModalWrapper showModal={showModal}>

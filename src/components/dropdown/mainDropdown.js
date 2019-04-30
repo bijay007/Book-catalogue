@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { extractObjContainingValue, extractUniqKeys } from '../../common/helpers';
-import { dropDownBody } from '../../common/styles';
+import { dropDownBody } from '@styles/styles';
 
 export default class DropDownMenu extends PureComponent {
   constructor(props) {

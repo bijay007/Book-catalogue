@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { formBody } from '../../common/styles';
+import { formBody } from '@styles/styles';
 
 export default class AddBookForm extends PureComponent {
   constructor(props) {

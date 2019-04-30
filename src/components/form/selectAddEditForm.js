@@ -13,7 +13,8 @@ const AddUpdateBook = (props) => {
       <AddBookForm
         addBook={addBook}
         closeModal={closeModal}
-      />)
+      />
+    )
     : (
       <EditBookForm
         updateBook={updateBook}
