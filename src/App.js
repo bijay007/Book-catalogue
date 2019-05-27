@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { openModal, closeModal } from './redux/actions/modalActions';
+import { openModal } from './redux/actions/modalActions';
 import { appContainer, appMenu, menuImage, transparentBtn } from '@styles/styles';
 import OuterTable from './components/table/outerTable';
 import AddUpdateBook from './components/form/selectAddEditForm';
@@ -16,7 +16,6 @@ class AppComponent extends Component {
       filteredBooks: [],
     };
     this.openFormModal = this.openFormModal.bind(this);
-    this.closeFormModal = this.closeFormModal.bind(this);
     this.showAllBooks = this.showAllBooks.bind(this);
     this.showFilteredBooks = this.showFilteredBooks.bind(this);
     this.clearBookFilter = this.clearBookFilter.bind(this);
@@ -28,11 +27,7 @@ class AppComponent extends Component {
   }
 
   openFormModal() {
-    this.props.dispatch(openModal())
-  }
-
-  closeFormModal() {
-    this.props.dispatch(closeModal())
+    this.props.openModal()
   }
 
   addBook(book) {
@@ -102,9 +97,8 @@ class AppComponent extends Component {
             <img src="/public/assests/icons/add_book.svg" alt="Add book" className={menuImage} />
           </button>
         </header>
-        <ModalWrapper >
+        <ModalWrapper>
           <AddUpdateBook
-            closeFormModal={this.closeFormModal}
             addBook={this.addBook}
             updateBook={this.updateBook}
             listOfBooks={listOfBooks}
@@ -122,4 +116,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(AppComponent);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    openModal: () => dispatch(openModal()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppComponent);

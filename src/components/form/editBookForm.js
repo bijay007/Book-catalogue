@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { formBody } from '@styles/styles';
+import { closeModal } from '../../redux/actions/modalActions';
 
 class EditBookForm extends PureComponent {
   constructor(props) {
@@ -74,8 +75,9 @@ class EditBookForm extends PureComponent {
 }
 
 const mapStateToProps = state => ({ showModal: state.modalState.showModal });
+const mapDispatchToProps = dispatch => ({ closeFormModal: () => dispatch(closeModal()) });
 
-export default connect(mapStateToProps)(EditBookForm);
+export default connect(mapStateToProps, mapDispatchToProps)(EditBookForm);
 
 EditBookForm.propTypes = {
   bookToEdit: PropTypes.shape({

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { formBody } from '@styles/styles';
+import { closeModal } from '../../redux/actions/modalActions';
 
 class AddBookForm extends PureComponent {
   constructor(props) {
@@ -66,8 +67,9 @@ class AddBookForm extends PureComponent {
 }
 
 const mapStateToProps = state => ({ showModal: state.modalState.showModal });
+const mapDispatchToProps = dispatch => ({ closeFormModal: () => dispatch(closeModal()) });
 
-export default connect(mapStateToProps)(AddBookForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AddBookForm);
 
 AddBookForm.propTypes = {
   closeFormModal: PropTypes.func.isRequired,
