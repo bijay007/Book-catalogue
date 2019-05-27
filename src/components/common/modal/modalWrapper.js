@@ -1,13 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { modalContainer, modalBody } from '@styles/styles';
 
 const ModalWrapper = (props) => {
-  const itemPassed = props;
-  if (itemPassed.showModal) {
+  const { showModal, children } = props;
+  if (showModal) {
     return (
       <div className={modalContainer}>
         <div className={modalBody}>
-          { itemPassed.children }
+          { children }
         </div>
       </div>
     );
@@ -15,4 +17,12 @@ const ModalWrapper = (props) => {
   return null;
 };
 
-export default ModalWrapper;
+const mapStateToProps = state => ({ showModal: state.modalState.showModal });
+
+export default connect(mapStateToProps)(ModalWrapper);
+
+
+ModalWrapper.propTypes = {
+  showModal: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
+};

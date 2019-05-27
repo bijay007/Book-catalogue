@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
-import {
-  appContainer, appMenu, menuImage, transparentBtn,
-} from '@styles/styles';
+import { connect } from 'react-redux';
+import { openModal, closeModal } from './redux/actions/modalActions';
+import { appContainer, appMenu, menuImage, transparentBtn } from '@styles/styles';
 import OuterTable from './components/table/outerTable';
 import AddUpdateBook from './components/form/selectAddEditForm';
 import { removeObjFromArr } from './common/helpers';
 import DropDownMenu from './components/dropdown/mainDropdown';
 import ModalWrapper from './components/common/modal/modalWrapper';
 
-export default class AppComponent extends Component {
+class AppComponent extends Component {
   constructor() {
     super();
     this.state = {
       listOfBooks: [],
       filteredBooks: [],
-      showModal: false,
     };
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+    this.openFormModal = this.openFormModal.bind(this);
+    this.closeFormModal = this.closeFormModal.bind(this);
     this.showAllBooks = this.showAllBooks.bind(this);
     this.showFilteredBooks = this.showFilteredBooks.bind(this);
     this.clearBookFilter = this.clearBookFilter.bind(this);
@@ -28,12 +27,12 @@ export default class AppComponent extends Component {
     this.updateBook = this.updateBook.bind(this);
   }
 
-  openModal() {
-    this.setState({ showModal: true });
+  openFormModal() {
+    this.props.dispatch(openModal())
   }
 
-  closeModal() {
-    this.setState({ showModal: false });
+  closeFormModal() {
+    this.props.dispatch(closeModal())
   }
 
   addBook(book) {
@@ -56,7 +55,7 @@ export default class AppComponent extends Component {
   editBook(index) {
     const { listOfBooks } = this.state;
     listOfBooks[index].index = index;
-    this.setState({ listOfBooks: [...listOfBooks] }, this.openModal());
+    this.setState({ listOfBooks: [...listOfBooks] }, this.openFormModal());
   }
 
   updateBook(book) {
@@ -86,7 +85,7 @@ export default class AppComponent extends Component {
   }
 
   render() {
-    const { showModal, listOfBooks } = this.state;
+    const { listOfBooks } = this.state;
     const bookListView = this.showAllBooks();
     return (
       <main className={appContainer}>
@@ -99,13 +98,13 @@ export default class AppComponent extends Component {
             showFilteredBooks={this.showFilteredBooks}
             clearBookFilter={this.clearBookFilter}
           />
-          <button type="button" className={transparentBtn} onClick={this.openModal}>
+          <button type="button" className={transparentBtn} onClick={this.openFormModal}>
             <img src="/public/assests/icons/add_book.svg" alt="Add book" className={menuImage} />
           </button>
         </header>
-        <ModalWrapper showModal={showModal}>
+        <ModalWrapper >
           <AddUpdateBook
-            closeModal={this.closeModal}
+            closeFormModal={this.closeFormModal}
             addBook={this.addBook}
             updateBook={this.updateBook}
             listOfBooks={listOfBooks}
@@ -116,3 +115,11 @@ export default class AppComponent extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    bookList: state.bookListState,
+  }
+}
+
+export default connect(mapStateToProps)(AppComponent);

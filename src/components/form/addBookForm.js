@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { formBody } from '@styles/styles';
 
-export default class AddBookForm extends PureComponent {
+class AddBookForm extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,7 +34,7 @@ export default class AddBookForm extends PureComponent {
     const {
       name, genre, price, valid,
     } = this.state;
-    const { closeModal, addBook } = this.props;
+    const { closeFormModal, addBook } = this.props;
     event.preventDefault();
     if (valid) {
       addBook({
@@ -42,7 +43,7 @@ export default class AddBookForm extends PureComponent {
       this.setState({
         name: '', genre: '', price: '', valid: false,
       });
-      closeModal();
+      closeFormModal();
     }
   }
 
@@ -64,7 +65,11 @@ export default class AddBookForm extends PureComponent {
   }
 }
 
+const mapStateToProps = state => ({ showModal: state.modalState.showModal });
+
+export default connect(mapStateToProps)(AddBookForm);
+
 AddBookForm.propTypes = {
-  closeModal: PropTypes.func.isRequired,
+  closeFormModal: PropTypes.func.isRequired,
   addBook: PropTypes.func.isRequired,
 };
