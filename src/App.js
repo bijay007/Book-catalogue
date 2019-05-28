@@ -19,7 +19,6 @@ class AppComponent extends Component {
     this.showAllBooks = this.showAllBooks.bind(this);
     this.showFilteredBooks = this.showFilteredBooks.bind(this);
     this.clearBookFilter = this.clearBookFilter.bind(this);
-    this.addBook = this.addBook.bind(this);
     this.deleteBook = this.deleteBook.bind(this);
     this.removeGenre = this.removeGenre.bind(this);
     this.editBook = this.editBook.bind(this);
@@ -28,11 +27,6 @@ class AppComponent extends Component {
 
   openFormModal() {
     this.props.openModal()
-  }
-
-  addBook(book) {
-    const { listOfBooks } = this.state;
-    this.setState({ listOfBooks: [...listOfBooks, book] }, () => this.showAllBooks());
   }
 
   deleteBook(index) {
@@ -68,10 +62,8 @@ class AppComponent extends Component {
   }
 
   showAllBooks() {
-    const { listOfBooks, filteredBooks } = this.state;
     return (
       <OuterTable
-        books={filteredBooks.length ? filteredBooks : listOfBooks}
         deleteBook={this.deleteBook}
         removeGenre={this.removeGenre}
         editBook={this.editBook}
@@ -99,7 +91,6 @@ class AppComponent extends Component {
         </header>
         <ModalWrapper>
           <AddUpdateBook
-            addBook={this.addBook}
             updateBook={this.updateBook}
             listOfBooks={listOfBooks}
           />

@@ -1,5 +1,5 @@
 import React from 'react';
-import TableContents from './innerTable';
+import InnerTable from './innerTable';
 import { outerTableBody } from '@styles/styles';
 
 const OuterTable = props => (
@@ -14,7 +14,7 @@ const OuterTable = props => (
     </thead>
     {
       <tbody>
-        <TableContents books={props} />
+        <InnerTable books={props} />
       </tbody>
     }
   </table>

@@ -1,10 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import DisplayBooks from './tableContents/displayBooks';
 import DisplayNoBookEmoji from './tableContents/displayNoBookEmoji';
 import Spinner from '../common/spinner/mainSpinner';
 
-export default class TableContents extends PureComponent {
+class InnerTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,10 +40,10 @@ export default class TableContents extends PureComponent {
     const { books } = this.props;
     const { oldData } = this.state;
     return (
-      books.books.length
+      books.length
         ? (
           <DisplayBooks
-            books={books.books}
+            books={books}
             deleteBook={this.deleteBook}
             removeGenre={this.removeGenre}
             editBook={this.editBook}
@@ -53,8 +54,10 @@ export default class TableContents extends PureComponent {
   }
 }
 
-TableContents.propTypes = {
-  books: PropTypes.shape({
-    books: PropTypes.instanceOf(Array).isRequired,
-  }).isRequired,
+const mapStateToProps = state => ({ books: state.bookListState.listOfBooks });
+
+export default connect(mapStateToProps)(InnerTable);
+
+InnerTable.propTypes = {
+  books: PropTypes.instanceOf(Array).isRequired,
 };

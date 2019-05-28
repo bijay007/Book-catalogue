@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { formBody } from '@styles/styles';
 import { closeModal } from '../../redux/actions/modalActions';
+import { addBook } from '../../redux/actions/bookActions';
 
 class AddBookForm extends PureComponent {
   constructor(props) {
@@ -35,10 +36,10 @@ class AddBookForm extends PureComponent {
     const {
       name, genre, price, valid,
     } = this.state;
-    const { closeFormModal, addBook } = this.props;
+    const { closeFormModal, addNewBook } = this.props;
     event.preventDefault();
     if (valid) {
-      addBook({
+      addNewBook({
         name, genre, price,
       });
       this.setState({
@@ -67,11 +68,14 @@ class AddBookForm extends PureComponent {
 }
 
 const mapStateToProps = state => ({ showModal: state.modalState.showModal });
-const mapDispatchToProps = dispatch => ({ closeFormModal: () => dispatch(closeModal()) });
+const mapDispatchToProps = dispatch => ({
+  closeFormModal: () => dispatch(closeModal()),
+  addNewBook: book => dispatch(addBook(book)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddBookForm);
 
 AddBookForm.propTypes = {
   closeFormModal: PropTypes.func.isRequired,
-  addBook: PropTypes.func.isRequired,
+  addNewBook: PropTypes.func.isRequired,
 };

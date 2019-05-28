@@ -5,13 +5,12 @@ import { findObjWithKey } from '../../common/helpers';
 
 const AddUpdateBook = (props) => {
   const {
-    listOfBooks, addBook, updateBook, closeFormModal,
+    listOfBooks, updateBook, closeFormModal,
   } = props;
   const bookToEdit = findObjWithKey(listOfBooks, 'index');
   const formToShow = bookToEdit.name === undefined
     ? (
       <AddBookForm
-        addBook={addBook}
         closeFormModal={closeFormModal}
       />
     )

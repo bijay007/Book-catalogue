@@ -1,26 +1,15 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { innerTBody } from '@styles/styles';
 
-export default class DisplayBooks extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      listOfBooks: props.books,
-    };
-  }
-
-  componentWillReceiveProps(newProps) {
-    const { books } = newProps;
-    this.setState({ listOfBooks: [...books] });
-  }
-
+class DisplayBooks extends Component {
   render() {
     const {
       deleteBook, removeGenre, editBook,
     } = this.props;
-    const { listOfBooks } = this.state;
-    return listOfBooks.map((book, index) => (
+    const { books } = this.props;
+    return books.map((book, index) => (
       <tr key={(book + index).toString()}>
         <td className={innerTBody.cellPadding}>{book.name}</td>
         <td className={innerTBody.cellPadding}>{book.genre}</td>
@@ -36,6 +25,10 @@ export default class DisplayBooks extends PureComponent {
     ));
   }
 }
+
+const mapStateToProps = state => ({ books: state.bookListState.listOfBooks });
+
+export default connect(mapStateToProps)(DisplayBooks);
 
 DisplayBooks.propTypes = {
   books: PropTypes.arrayOf(PropTypes.object).isRequired,
