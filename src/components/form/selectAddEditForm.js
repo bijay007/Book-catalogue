@@ -1,27 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import AddBookForm from './addBookForm';
 import EditBookForm from './editBookForm';
 import { findObjWithKey } from '../../common/helpers';
 
 const AddUpdateBook = (props) => {
-  const {
-    listOfBooks, updateBook, closeFormModal,
-  } = props;
+  const { listOfBooks } = props;
   const bookToEdit = findObjWithKey(listOfBooks, 'index');
-  const formToShow = bookToEdit.name === undefined
-    ? (
-      <AddBookForm
-        closeFormModal={closeFormModal}
-      />
-    )
-    : (
-      <EditBookForm
-        updateBook={updateBook}
-        closeFormModal={closeFormModal}
-        bookToEdit={bookToEdit}
-      />
-    );
-  return formToShow;
+  if (bookToEdit.name === undefined) return <AddBookForm />
+  return <EditBookForm bookToEdit={bookToEdit}/>
 };
 
-export default AddUpdateBook;
+const mapStateToProps = (state) => ({
+  listOfBooks: state.bookListState.listOfBooks
+})
+
+export default connect(mapStateToProps)(AddUpdateBook);

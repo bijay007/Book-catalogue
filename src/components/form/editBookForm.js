@@ -1,10 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { formBody } from '@styles/styles';
 import { closeModal } from '../../redux/actions/modalActions';
+import { updateBook } from '../../redux/actions/bookActions';
 
-class EditBookForm extends PureComponent {
+class EditBookForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,12 +43,12 @@ class EditBookForm extends PureComponent {
     const {
       name, genre, price, valid,
     } = this.state;
-    const { closeFormModal, updateBook } = this.props;
+    const { closeFormModal, updateOldBook } = this.props;
     event.preventDefault();
     this.validateForm();
     if (valid) {
       closeFormModal();
-      updateBook({
+      updateOldBook({
         name, genre, price,
       });
     }
@@ -75,7 +76,10 @@ class EditBookForm extends PureComponent {
 }
 
 const mapStateToProps = state => ({ showModal: state.modalState.showModal });
-const mapDispatchToProps = dispatch => ({ closeFormModal: () => dispatch(closeModal()) });
+const mapDispatchToProps = dispatch => ({
+  closeFormModal: () => dispatch(closeModal()),
+  updateOldBook: book => dispatch(updateBook(book)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditBookForm);
 
@@ -84,5 +88,5 @@ EditBookForm.propTypes = {
     name: PropTypes.string.isRequired,
   }).isRequired,
   closeFormModal: PropTypes.func.isRequired,
-  updateBook: PropTypes.func.isRequired,
+  updateOldBook: PropTypes.func.isRequired,
 };

@@ -14,7 +14,7 @@ const OuterTable = props => (
     </thead>
     {
       <tbody>
-        <InnerTable books={props} />
+        <InnerTable />
       </tbody>
     }
   </table>

@@ -11,9 +11,6 @@ class InnerTable extends Component {
     this.state = {
       oldData: <Spinner />,
     };
-    this.deleteBook = this.deleteBook.bind(this);
-    this.removeGenre = this.removeGenre.bind(this);
-    this.editBook = this.editBook.bind(this);
   }
 
   componentDidMount() {
@@ -21,33 +18,12 @@ class InnerTable extends Component {
     return setTimeout(waitFakeBookFetch, 2500);
   }
 
-  deleteBook(index) {
-    const { books } = this.props;
-    books.deleteBook(index);
-  }
-
-  removeGenre(index) {
-    const { books } = this.props;
-    books.removeGenre(index);
-  }
-
-  editBook(index) {
-    const { books } = this.props;
-    books.editBook(index);
-  }
-
   render() {
-    const { books } = this.props;
     const { oldData } = this.state;
     return (
-      books.length
+      this.props.books.length
         ? (
-          <DisplayBooks
-            books={books}
-            deleteBook={this.deleteBook}
-            removeGenre={this.removeGenre}
-            editBook={this.editBook}
-          />
+          <DisplayBooks />
         )
         : oldData
     );

@@ -2,23 +2,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { innerTBody } from '@styles/styles';
+import { editBook, deleteBook, removeGenre } from '../../../redux/actions/bookActions';
 
 class DisplayBooks extends Component {
   render() {
     const {
-      deleteBook, removeGenre, editBook,
+      _deleteBook, _removeGenre, _editBook, _listOfBooks,
     } = this.props;
-    const { books } = this.props;
-    return books.map((book, index) => (
+    return _listOfBooks.map((book, index) => (
       <tr key={(book + index).toString()}>
         <td className={innerTBody.cellPadding}>{book.name}</td>
         <td className={innerTBody.cellPadding}>{book.genre}</td>
         <td className={innerTBody.cellPadding}>{book.price}</td>
         <td className={innerTBody.cellPadding}>
           <div className={innerTBody.actions}>
-            <img className={innerTBody.edition} onClick={() => editBook(index)} role="presentation" src="/public/assests/icons/edit_book.svg" alt="edit book" />
-            <img className={innerTBody.edition} onClick={() => deleteBook(index)} role="presentation" src="/public/assests/icons/delete_book.svg" alt="delete book" />
-            <img className={innerTBody.delGenre} onClick={() => removeGenre(index)} role="presentation" src="/public/assests/icons/delete_genre.png" alt="delete book" />
+            <img className={innerTBody.edition} onClick={() => _editBook(index)} role="presentation" src="/public/assests/icons/edit_book.svg" alt="edit book" />
+            <img className={innerTBody.edition} onClick={() => _deleteBook(index)} role="presentation" src="/public/assests/icons/delete_book.svg" alt="delete book" />
+            <img className={innerTBody.delGenre} onClick={() => _removeGenre(index)} role="presentation" src="/public/assests/icons/delete_genre.png" alt="delete book" />
           </div>
         </td>
       </tr>
@@ -26,13 +26,18 @@ class DisplayBooks extends Component {
   }
 }
 
-const mapStateToProps = state => ({ books: state.bookListState.listOfBooks });
+const mapStateToProps = state => ({ _listOfBooks: state.bookListState.listOfBooks });
+const mapDispatchToProps = dispatch => ({
+  _editBook: index => dispatch(editBook(index)),
+  _deleteBook: index => dispatch(deleteBook(index)),
+  _removeGenre: index => dispatch(removeGenre(index)),
+});
 
-export default connect(mapStateToProps)(DisplayBooks);
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayBooks);
 
 DisplayBooks.propTypes = {
-  books: PropTypes.arrayOf(PropTypes.object).isRequired,
-  deleteBook: PropTypes.func.isRequired,
-  removeGenre: PropTypes.func.isRequired,
-  editBook: PropTypes.func.isRequired,
+  _listOfBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
+  _deleteBook: PropTypes.func.isRequired,
+  _removeGenre: PropTypes.func.isRequired,
+  _editBook: PropTypes.func.isRequired,
 };
