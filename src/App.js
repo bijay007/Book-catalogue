@@ -13,13 +13,8 @@ class AppComponent extends Component {
     this.state = {
       filteredBooks: [],
     };
-    this.openFormModal = this.openFormModal.bind(this);
     this.showFilteredBooks = this.showFilteredBooks.bind(this);
     this.clearBookFilter = this.clearBookFilter.bind(this);
-  }
-
-  openFormModal() {
-    this.props.openModal()
   }
 
   showFilteredBooks(books) {
@@ -31,7 +26,7 @@ class AppComponent extends Component {
   }
 
   render() {
-    const { listOfBooks } = this.props;
+    const { listOfBooks, _openModal } = this.props;
     return (
       <main className={appContainer}>
         <header className={appMenu}>
@@ -43,7 +38,7 @@ class AppComponent extends Component {
             showFilteredBooks={this.showFilteredBooks}
             clearBookFilter={this.clearBookFilter}
           />
-          <button type="button" className={transparentBtn} onClick={this.openFormModal}>
+          <button type="button" className={transparentBtn} onClick={() => _openModal()}>
             <img src="/public/assests/icons/add_book.svg" alt="Add book" className={menuImage} />
           </button>
         </header>
@@ -62,7 +57,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    openModal: () => dispatch(openModal()),
+    _openModal: () => dispatch(openModal()),
   }
 }
 

@@ -1,4 +1,4 @@
-import { removeObjFromArr } from '../../common/helpers';
+import { findAndReplaceObj } from '../../common/helpers';
 
 const initialState = {
   listOfBooks: [],
@@ -7,9 +7,7 @@ const initialState = {
 const bookReducers = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_BOOK':
-      return {
-        listOfBooks: [...state.listOfBooks, action.book],
-      };
+      return { listOfBooks: [...state.listOfBooks, action.book] };
     case 'EDIT_BOOK': {
       // deep clone as we will be mutating objects inside the array
       const listOfBooks = state.listOfBooks.map(book => Object.assign({}, book));
@@ -18,10 +16,8 @@ const bookReducers = (state = initialState, action) => {
     }
     case 'UPDATE_BOOK': {
       const listOfBooks = state.listOfBooks.map(book => Object.assign({}, book));
-      const filteredList = removeObjFromArr(listOfBooks, 'index');
-      return {
-        listOfBooks: [...filteredList, action.book],
-      };
+      const updatedList = findAndReplaceObj(listOfBooks, 'index', action.book);
+      return { updatedList };
     }
     case 'DELETE_BOOK': {
       const listOfBooks = [...state.listOfBooks];

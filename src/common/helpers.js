@@ -11,10 +11,12 @@ function findObjWithKey(arr, prop) {
   return requiredObj;
 }
 
-/* returns an array excluding an object having a specified property */
-function removeObjFromArr(arr, propName) {
-  const newArr = arr.filter(obj => !Object.prototype.hasOwnProperty.call(obj, propName));
-  return newArr;
+/* returns a new array by replacing an old object with new object (via key checking here) */
+function findAndReplaceObj(arr, key, newObj) {
+  const indexOldObj = arr.findIndex(obj => Object.prototype.hasOwnProperty.call(obj, key));
+  const updatedArr = [...arr];
+  updatedArr.splice(indexOldObj, 1, newObj);
+  return updatedArr;
 }
 
 /* returns an array of objects that has a specific value for the provided property name */
@@ -40,7 +42,7 @@ function extractUniqKeys(arr, propName) {
 
 module.exports = {
   findObjWithKey,
-  removeObjFromArr,
+  findAndReplaceObj,
   extractObjContainingValue,
   extractUniqKeys,
 };
