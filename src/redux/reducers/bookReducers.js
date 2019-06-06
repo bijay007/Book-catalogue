@@ -1,4 +1,4 @@
-import { findAndReplaceObj, getArrayUnion } from '../../common/helpers';
+import { findAndReplaceObj, getArrayUnion } from '@common/helpers';
 
 const initialState = {
   listOfBooks: [],
@@ -9,7 +9,7 @@ const bookReducers = (state = initialState, action) => {
     case 'ADD_BOOK':
       return { listOfBooks: [...state.listOfBooks, action.book] };
     case 'EDIT_BOOK': {
-      // deep clone as we will be mutating objects inside the array
+      // single level object cloning as we will be mutating objects inside the array
       const listOfBooks = state.listOfBooks.map(book => Object.assign({}, book));
       listOfBooks[action.index].index = action.index;
       return { listOfBooks };

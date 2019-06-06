@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
-import { formBody } from '@styles/styles';
-import { closeModal } from '../../redux/actions/modalActions';
-import { addBook } from '../../redux/actions/bookActions';
+import { formBody } from '@common/styles';
+import { closeModal } from '@redux/actions/modalActions';
+import { addBook } from '@redux/actions/bookActions';
 
 class AddBookForm extends PureComponent {
   constructor(props) {

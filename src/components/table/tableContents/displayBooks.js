@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { innerTBody } from '@styles/styles';
-import { editBook, deleteBook, removeGenre } from '../../../redux/actions/bookActions';
+import { innerTBody } from '@common/styles';
+import { editBook, deleteBook, removeGenre } from '@redux/actions/bookActions';
 
 class DisplayBooks extends Component {
   render() {

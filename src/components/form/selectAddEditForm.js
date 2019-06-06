@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import AddBookForm from './addBookForm';
 import EditBookForm from './editBookForm';
-import { findObjWithKey } from '../../common/helpers';
+import { findObjWithKey } from '@common/helpers';
 
 const AddUpdateBook = (props) => {
   const { listOfBooks } = props;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { openModal } from './redux/actions/modalActions';
-import { appContainer, appMenu, menuImage, transparentBtn } from '@styles/styles';
+import { openModal } from '@redux/actions/modalActions';
+import { appContainer, appMenu, menuImage, transparentBtn } from '@common/styles';
 import OuterTable from './components/table/outerTable';
 import AddUpdateBook from './components/form/selectAddEditForm';
 import DropDownMenu from './components/dropdown/mainDropdown';

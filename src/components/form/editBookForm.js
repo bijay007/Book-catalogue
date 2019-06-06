@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { formBody } from '@styles/styles';
-import { closeModal } from '../../redux/actions/modalActions';
-import { updateBook } from '../../redux/actions/bookActions';
+import { formBody } from '@common/styles';
+import { closeModal } from '@redux/actions/modalActions';
+import { updateBook } from '@redux/actions/bookActions';
 
 class EditBookForm extends Component {
   constructor(props) {

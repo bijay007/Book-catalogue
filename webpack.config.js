@@ -30,11 +30,12 @@ const confObject = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
     modules: [path.resolve(__dirname, './src'), 'node_modules'],
     alias: {
-      '@styles': path.resolve(__dirname, './src/common'),
+      '@common': path.resolve(__dirname, './src/common'),
+      '@redux': path.resolve(__dirname, './src/redux'),
     },
+    extensions: ['.js', '.jsx'],
   },
   plugins: [
     new HtmlWebpackPlugin({

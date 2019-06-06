@@ -1,6 +1,6 @@
 import React from 'react';
 import InnerTable from './innerTable';
-import { outerTableBody } from '@styles/styles';
+import { outerTableBody } from '@common/styles';
 
 const OuterTable = props => (
   <table className={outerTableBody}>

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { dropDownBody } from '@styles/styles';
+import { dropDownBody } from '@common/styles';
 import { connect } from 'react-redux';
-import { showHideBooks } from '../../redux/actions/bookActions';
-import { extractObjContainingValue, extractUniqKeys, getArrayDifference } from '../../common/helpers';
+import { showHideBooks } from '@redux/actions/bookActions';
+import { extractObjContainingValue, extractUniqKeys, getArrayDifference } from '@common/helpers';
 
 class DropDownMenu extends Component {
   constructor() {

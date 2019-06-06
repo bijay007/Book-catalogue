@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { modalContainer, modalBody } from '@styles/styles';
+import { modalContainer, modalBody } from '@common/styles';
 
 const ModalWrapper = (props) => {
   const { showModal, children } = props;
