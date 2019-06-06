@@ -29,9 +29,8 @@ class DropDownMenu extends Component {
   }
 
   addBookFilter(booksToShow) {
-    const { listOfBooks, _showHideBooks } = this.props;
-    const booksToHide = getArrayDifference(listOfBooks, booksToShow);
-    const finalBooklist = booksToHide.map(item => Object.assign({}, item, { show: false }));
+    const { _showHideBooks } = this.props;
+    const finalBooklist = booksToShow.map(item => Object.assign({}, item, { show: true }));
     _showHideBooks(finalBooklist);
   }
 

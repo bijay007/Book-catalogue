@@ -20,9 +20,16 @@ const bookReducers = (state = initialState, action) => {
       return { listOfBooks };
     }
     case 'SHOW_HIDE_BOOKS': {
-      const originalList = state.listOfBooks.map(book => Object.assign({}, book));
-      const modifiedBooks = action.books.map(book => Object.assign({}, book));
-      const listOfBooks = getArrayUnion(originalList, modifiedBooks);
+      let oldBooks;
+      const selectedBooks = action.books.map(book => Object.assign({}, book));
+      if (selectedBooks.length) {
+        oldBooks = state.listOfBooks.map(book => Object.assign({}, book, { show: false }));
+      } else {
+        oldBooks = state.listOfBooks.map(book => Object.assign({}, book, { show: true }));
+      }
+      // Another approach is get the difference between original array and passed array (using
+      // helper.getArrayDifference()) and set the `show` prop of the difference array to false.
+      const listOfBooks = getArrayUnion(oldBooks, selectedBooks);
       return { listOfBooks };
     }
     case 'DELETE_BOOK': {
