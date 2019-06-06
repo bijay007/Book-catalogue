@@ -15,9 +15,9 @@ const bookReducers = (state = initialState, action) => {
       return { listOfBooks };
     }
     case 'UPDATE_BOOK': {
-      const listOfBooks = state.listOfBooks.map(book => Object.assign({}, book));
-      const updatedList = findAndReplaceObj(listOfBooks, 'index', action.book);
-      return { updatedList };
+      const originalList = state.listOfBooks.map(book => Object.assign({}, book));
+      const listOfBooks = findAndReplaceObj(originalList, 'index', action.book);
+      return { listOfBooks };
     }
     case 'SHOW_HIDE_BOOKS': {
       const originalList = state.listOfBooks.map(book => Object.assign({}, book));
