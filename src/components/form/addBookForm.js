@@ -14,7 +14,6 @@ class AddBookForm extends PureComponent {
       genre: '',
       price: '',
       valid: false,
-      show: true,
     };
     this.validateForm = this.validateForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -36,9 +35,13 @@ class AddBookForm extends PureComponent {
 
   closeModalAndSaveBook(event) {
     const {
-      name, genre, price, valid, show,
+      name, genre, price, valid,
     } = this.state;
-    const { closeFormModal, addNewBook } = this.props;
+    let show = true;
+    const { closeFormModal, addNewBook, genreSelected } = this.props;
+    if (genreSelected) {
+      show = genre === genreSelected;
+    }
     event.preventDefault();
     if (valid) {
       const id = uniqid();
@@ -70,7 +73,9 @@ class AddBookForm extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({ showModal: state.modalState.showModal });
+const mapStateToProps = state => ({
+  genreSelected: state.tableState.genreSelected,
+});
 const mapDispatchToProps = dispatch => ({
   closeFormModal: () => dispatch(closeModal()),
   addNewBook: book => dispatch(addBook(book)),
@@ -79,6 +84,7 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(AddBookForm);
 
 AddBookForm.propTypes = {
+  genreSelected: PropTypes.string.isRequired,
   closeFormModal: PropTypes.func.isRequired,
   addNewBook: PropTypes.func.isRequired,
 };

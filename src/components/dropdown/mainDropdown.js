@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { dropDownBody } from '@common/styles';
 import { connect } from 'react-redux';
 import { showHideBooks } from '@redux/actions/bookActions';
-import { extractObjContainingValue, extractUniqKeys, getArrayDifference } from '@common/helpers';
+import updateTable from '@redux/actions/tableActions';
+import { extractObjContainingValue, extractUniqKeys } from '@common/helpers';
 
 class DropDownMenu extends Component {
   constructor() {
@@ -35,13 +36,14 @@ class DropDownMenu extends Component {
   }
 
   selectResult(e) {
-    const { listOfBooks } = this.props;
+    const { listOfBooks, _updateTable } = this.props;
     const selectedGenre = e.target.value;
     const booksWithSelectedGenre = extractObjContainingValue(listOfBooks, 'genre', selectedGenre);
     if (selectedGenre === 'All Genre') {
       this.clearBookFilter();
     } else {
       this.addBookFilter(booksWithSelectedGenre);
+      _updateTable(selectedGenre);
     }
   }
 
@@ -65,6 +67,7 @@ class DropDownMenu extends Component {
 
 const mapStateToProps = state => ({ listOfBooks: state.bookListState.listOfBooks });
 const mapDispatchToProps = dispatch => ({
+  _updateTable: genre => dispatch(updateTable(genre)),
   _showHideBooks: books => dispatch(showHideBooks(books)),
 });
 
@@ -73,4 +76,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(DropDownMenu);
 DropDownMenu.propTypes = {
   listOfBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
   _showHideBooks: PropTypes.func.isRequired,
+  _updateTable: PropTypes.func.isRequired,
 };

@@ -9,7 +9,8 @@ class DisplayBooks extends Component {
     const {
       _deleteBook, _removeGenre, _editBook, _listOfBooks,
     } = this.props;
-    return _listOfBooks.map((book, index) => (
+    const booksToShow = _listOfBooks.filter(book => book.show);
+    return booksToShow.map((book, index) => (
       <tr key={(book + index).toString()}>
         <td className={innerTBody.cellPadding}>{book.name}</td>
         <td className={innerTBody.cellPadding}>{book.genre}</td>
