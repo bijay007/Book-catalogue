@@ -2,7 +2,7 @@
   "name": "reactBookstoreApp",
   "version": "1.0.0",
   "description": "Basic react app to manage a catalogue for books",
-  "repository": "https://github.com/bijay007/react-warmup.git",
+  "repository": "https://github.com/bijay007/Book-catalogue",
   "author": "Bijay Timilsina <bjtimi.007@gmail.com>",
   "license": "MIT",
   "private": false,
