@@ -1,31 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { innerTBody } from '@common/styles';
 import { editBook, deleteBook, removeGenre } from '@redux/actions/bookActions';
 
-class DisplayBooks extends Component {
-  render() {
-    const {
-      _deleteBook, _removeGenre, _editBook, _listOfBooks,
-    } = this.props;
-    const booksToShow = _listOfBooks.filter(book => book.show);
-    return booksToShow.map((book, index) => (
-      <tr key={(book + index).toString()}>
-        <td className={innerTBody.cellPadding}>{book.name}</td>
-        <td className={innerTBody.cellPadding}>{book.genre}</td>
-        <td className={innerTBody.cellPadding}>{book.price}</td>
-        <td className={innerTBody.cellPadding}>
-          <div className={innerTBody.actions}>
-            <img className={innerTBody.edition} onClick={() => _editBook(index)} role="presentation" src="/public/assests/icons/edit_book.svg" alt="edit book" />
-            <img className={innerTBody.edition} onClick={() => _deleteBook(index)} role="presentation" src="/public/assests/icons/delete_book.svg" alt="delete book" />
-            <img className={innerTBody.delGenre} onClick={() => _removeGenre(index)} role="presentation" src="/public/assests/icons/delete_genre.png" alt="delete book" />
-          </div>
-        </td>
-      </tr>
-    ));
-  }
-}
+const DisplayBooks = (props) => {
+  const {
+    _deleteBook, _removeGenre, _editBook, _listOfBooks,
+  } = props;
+  const booksToShow = _listOfBooks.filter(book => book.show);
+  return booksToShow.map((book, index) => (
+    <tr key={(book + index).toString()}>
+      <td className={innerTBody.cellPadding}>{book.name}</td>
+      <td className={innerTBody.cellPadding}>{book.genre}</td>
+      <td className={innerTBody.cellPadding}>{book.price}</td>
+      <td className={innerTBody.cellPadding}>
+        <div className={innerTBody.actions}>
+          <img className={innerTBody.edition} onClick={() => _editBook(index)} role="presentation" src="/public/assests/icons/edit_book.svg" alt="edit book" />
+          <img className={innerTBody.edition} onClick={() => _deleteBook(index)} role="presentation" src="/public/assests/icons/delete_book.svg" alt="delete book" />
+          <img className={innerTBody.delGenre} onClick={() => _removeGenre(index)} role="presentation" src="/public/assests/icons/delete_genre.png" alt="delete book" />
+        </div>
+      </td>
+    </tr>
+  ));
+};
 
 const mapStateToProps = state => ({ _listOfBooks: state.bookListState.listOfBooks });
 const mapDispatchToProps = dispatch => ({
