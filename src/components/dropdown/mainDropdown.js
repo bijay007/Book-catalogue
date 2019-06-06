@@ -1,15 +1,19 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { extractObjContainingValue, extractUniqKeys } from '../../common/helpers';
 import { dropDownBody } from '@styles/styles';
+import { connect } from 'react-redux';
+import { showHideBooks } from '../../redux/actions/bookActions';
+import { extractObjContainingValue, extractUniqKeys, getArrayDifference } from '../../common/helpers';
 
-export default class DropDownMenu extends PureComponent {
-  constructor(props) {
-    super(props);
+class DropDownMenu extends Component {
+  constructor() {
+    super();
     this.state = {
       listOfGenre: [],
     };
     this.selectResult = this.selectResult.bind(this);
+    this.clearBookFilter = this.clearBookFilter.bind(this);
+    this.addBookFilter = this.addBookFilter.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -18,37 +22,56 @@ export default class DropDownMenu extends PureComponent {
     this.setState({ listOfGenre: [...extractedGenreArr] });
   }
 
+  clearBookFilter() {
+    const { listOfBooks, _showHideBooks } = this.props;
+    const showAllBooks = listOfBooks.map(book => Object.assign({}, book, { show: true }));
+    _showHideBooks(showAllBooks);
+  }
+
+  addBookFilter(booksToShow) {
+    const { listOfBooks, _showHideBooks } = this.props;
+    const booksToHide = getArrayDifference(listOfBooks, booksToShow);
+    const finalBooklist = booksToHide.map(item => Object.assign({}, item, { show: false }));
+    _showHideBooks(finalBooklist);
+  }
+
   selectResult(e) {
-    const { listOfBooks, showFilteredBooks, clearBookFilter } = this.props;
+    const { listOfBooks } = this.props;
     const selectedGenre = e.target.value;
     const booksWithSelectedGenre = extractObjContainingValue(listOfBooks, 'genre', selectedGenre);
     if (selectedGenre === 'All Genre') {
-      clearBookFilter();
+      this.clearBookFilter();
     } else {
-      showFilteredBooks(booksWithSelectedGenre);
+      this.addBookFilter(booksWithSelectedGenre);
     }
   }
 
   render() {
     const { listOfGenre } = this.state;
-    if (!listOfGenre.length) {
-      return null;
+    if (listOfGenre.length) {
+      return (
+        <select className={dropDownBody} onChange={this.selectResult}>
+          <option value="All Genres">All Genres</option>
+          {
+            listOfGenre.map(
+              (genre, index) => <option key={index.toString()} value={genre}>{genre}</option>,
+            )
+          }
+        </select>
+      );
     }
-    return (
-      <select className={dropDownBody} onChange={this.selectResult}>
-        <option value="All Genres">All Genres</option>
-        {
-          listOfGenre.map(
-            (genre, index) => <option key={index.toString()} value={genre}>{genre}</option>,
-          )
-        }
-      </select>
-    );
+    return null;
   }
 }
 
+const mapStateToProps = state => ({ listOfBooks: state.bookListState.listOfBooks });
+const mapDispatchToProps = dispatch => ({
+  _showHideBooks: books => dispatch(showHideBooks(books)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DropDownMenu);
+
 DropDownMenu.propTypes = {
   listOfBooks: PropTypes.arrayOf(PropTypes.object).isRequired,
-  showFilteredBooks: PropTypes.func.isRequired,
-  clearBookFilter: PropTypes.func.isRequired,
+  _showHideBooks: PropTypes.func.isRequired,
 };

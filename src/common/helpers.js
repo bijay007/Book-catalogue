@@ -1,5 +1,3 @@
-/* ************** ARRAY METHODS ************** */
-
 /* return an object from an array of object containing the specified property name */
 function findObjWithKey(arr, prop) {
   const requiredObj = {};
@@ -17,6 +15,25 @@ function findAndReplaceObj(arr, key, newObj) {
   const updatedArr = [...arr];
   updatedArr.splice(indexOldObj, 1, newObj);
   return updatedArr;
+}
+
+/* Get difference between 2 array of objects */
+function getArrayDifference(arrA, arrB) {
+  return arrA.filter(item1 => !arrB.some(
+    item2 => (item2.name === item1.name && item2.genre === item1.genre),
+  ));
+}
+
+/* Given 2 arrays, replaces all objects in oldArr that are also in newArr */
+function getArrayUnion(oldArr, newArr) {
+  const mergedArr = newArr.concat(oldArr);
+  const uniqueBookSet = new Set();
+  const nonDuplicateArr = mergedArr.filter((book) => {
+    const isDuplicate = uniqueBookSet.has(book.id);
+    uniqueBookSet.add(book.id);
+    return !isDuplicate;
+  });
+  return nonDuplicateArr;
 }
 
 /* returns an array of objects that has a specific value for the provided property name */
@@ -37,12 +54,11 @@ function extractUniqKeys(arr, propName) {
   return uniqueArray;
 }
 
-/* ************** OBJECT METHODS ************** */
-
-
 module.exports = {
   findObjWithKey,
   findAndReplaceObj,
+  getArrayDifference,
+  getArrayUnion,
   extractObjContainingValue,
   extractUniqKeys,
 };

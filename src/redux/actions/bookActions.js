@@ -14,6 +14,10 @@ const updateBook = book => ({
   type: 'UPDATE_BOOK', book,
 });
 
+const showHideBooks = books => ({
+  type: 'SHOW_HIDE_BOOKS', books,
+});
+
 const deleteBook = index => ({
   type: 'DELETE_BOOK', index,
 });
@@ -26,6 +30,7 @@ export {
   addBook,
   editBook,
   updateBook,
+  showHideBooks,
   deleteBook,
   removeGenre,
 };

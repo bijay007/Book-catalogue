@@ -1,4 +1,4 @@
-import { findAndReplaceObj } from '../../common/helpers';
+import { findAndReplaceObj, getArrayUnion } from '../../common/helpers';
 
 const initialState = {
   listOfBooks: [],
@@ -18,6 +18,12 @@ const bookReducers = (state = initialState, action) => {
       const listOfBooks = state.listOfBooks.map(book => Object.assign({}, book));
       const updatedList = findAndReplaceObj(listOfBooks, 'index', action.book);
       return { updatedList };
+    }
+    case 'SHOW_HIDE_BOOKS': {
+      const originalList = state.listOfBooks.map(book => Object.assign({}, book));
+      const modifiedBooks = action.books.map(book => Object.assign({}, book));
+      const listOfBooks = getArrayUnion(originalList, modifiedBooks);
+      return { listOfBooks };
     }
     case 'DELETE_BOOK': {
       const listOfBooks = [...state.listOfBooks];
